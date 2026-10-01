@@ -1,0 +1,245 @@
+{
+  "cafe": {
+    "name": "Bryton Café",
+    "logo": "images/logo.png",
+    "tagline": {
+      "id": "Kopi, makanan & cerita",
+      "en": "Coffee, food & stories"
+    },
+    "note": {
+      "id": "Harga belum termasuk pajak & service. Pesan di kasir atau panggil waiter.",
+      "en": "Prices exclude tax & service. Order at the cashier or ask our waiter."
+    }
+  },
+  "categories": [
+    {
+      "id": "coffee",
+      "name": {
+        "id": "Kopi",
+        "en": "Coffee"
+      }
+    },
+    {
+      "id": "non-coffee",
+      "name": {
+        "id": "Non-Kopi",
+        "en": "Non-Coffee"
+      }
+    },
+    {
+      "id": "food",
+      "name": {
+        "id": "Makanan",
+        "en": "Food"
+      }
+    },
+    {
+      "id": "snack",
+      "name": {
+        "id": "Camilan",
+        "en": "Snacks"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "es-kopi-susu-bryton",
+      "category": "coffee",
+      "name": {
+        "id": "Americano",
+        "en": "Americano"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 25000,
+      "image": "images/americano-mup38g26.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Single shot",
+            "en": "Single shot"
+          },
+          "price": 20000
+        },
+        {
+          "name": {
+            "id": "Double shot",
+            "en": "Double shot"
+          },
+          "price": 25000
+        }
+      ]
+    },
+    {
+      "id": "cappuccino",
+      "category": "coffee",
+      "name": {
+        "id": "Cappuccino",
+        "en": "Cappuccino"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 0,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "price": 30000
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Iced"
+          },
+          "price": 30000
+        }
+      ],
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "americano",
+      "category": "non-coffee",
+      "name": {
+        "id": "Teh tawar",
+        "en": "Tea"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 0,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "price": 8000
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Iced"
+          },
+          "price": 8000
+        }
+      ],
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "matcha-latte",
+      "category": "non-coffee",
+      "name": {
+        "id": "Matcha Latte",
+        "en": "Matcha Latte"
+      },
+      "description": {
+        "id": "Matcha Jepang dengan susu segar.",
+        "en": "Japanese matcha with fresh milk."
+      },
+      "price": 28000,
+      "image": "",
+      "tags": [
+        "new"
+      ],
+      "available": true
+    },
+    {
+      "id": "chocolate",
+      "category": "non-coffee",
+      "name": {
+        "id": "Cokelat",
+        "en": "Chocolate"
+      },
+      "description": {
+        "id": "Cokelat premium, panas atau dingin.",
+        "en": "Premium chocolate, hot or iced."
+      },
+      "price": 25000,
+      "image": "",
+      "tags": [],
+      "available": false
+    },
+    {
+      "id": "nasi-goreng-bryton",
+      "category": "food",
+      "name": {
+        "id": "Nasi Goreng Bryton",
+        "en": "Bryton Fried Rice"
+      },
+      "description": {
+        "id": "Nasi goreng dengan telur, ayam suwir & kerupuk.",
+        "en": "Fried rice with egg, shredded chicken & crackers."
+      },
+      "price": 35000,
+      "image": "",
+      "tags": [
+        "bestseller",
+        "spicy"
+      ],
+      "available": true
+    },
+    {
+      "id": "spaghetti-carbonara",
+      "category": "food",
+      "name": {
+        "id": "Spaghetti Carbonara",
+        "en": "Spaghetti Carbonara"
+      },
+      "description": {
+        "id": "Saus krim, smoked beef & keju parmesan.",
+        "en": "Cream sauce, smoked beef & parmesan."
+      },
+      "price": 42000,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "french-fries",
+      "category": "snack",
+      "name": {
+        "id": "Kentang Goreng",
+        "en": "French Fries"
+      },
+      "description": {
+        "id": "Disajikan dengan saus sambal & mayones.",
+        "en": "Served with chili sauce & mayo."
+      },
+      "price": 22000,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "croissant",
+      "category": "snack",
+      "name": {
+        "id": "Croissant Butter",
+        "en": "Butter Croissant"
+      },
+      "description": {
+        "id": "Croissant renyah, dipanggang setiap pagi.",
+        "en": "Flaky croissant, baked every morning."
+      },
+      "price": 24000,
+      "image": "",
+      "tags": [
+        "new"
+      ],
+      "available": true
+    }
+  ]
+}
