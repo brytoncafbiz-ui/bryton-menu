@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Menu Editor · Bryton Café</title>
+<style>
+  :root{--bg:#f6f2ec;--card:#fff;--ink:#2b1d14;--muted:#7a6656;--line:#e4d8c8;--accent:#c8742c;--danger:#b23a2a;--ok:#2f7a3a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,sans-serif}
+  header{position:sticky;top:0;z-index:10;background:#2b1d14;color:#f7ead8;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  header h1{font-size:16px;margin:0 auto 0 0}
+  .btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 12px;border-radius:9px;font:inherit;font-weight:600;cursor:pointer}
+  header .btn{background:transparent;color:#f7ead8;border-color:rgba(255,255,255,.25)}
+  .btn.primary,header .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.danger{color:var(--danger)}
+  .btn.sm{padding:4px 9px;font-size:12.5px}
+  main{max-width:860px;margin:0 auto;padding:16px}
+  .status{padding:10px 12px;border-radius:10px;background:#fff6e5;border:1px solid #f0d9a8;margin-bottom:14px;font-size:13px}
+  .status.ok{background:#eaf6ec;border-color:#bfe0c5}
+  .tabs{display:flex;gap:6px;margin-bottom:14px}
+  .tabs button{flex:1;padding:9px;border-radius:9px;border:1px solid var(--line);background:var(--card);font:inherit;font-weight:600;cursor:pointer}
+  .tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+  .tools{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  select,input[type=text],input[type=number],textarea{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);width:100%}
+  textarea{resize:vertical;min-height:54px}
+  .tools select{width:auto;flex:1}
+  details>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:8px 10px;cursor:pointer}
+  details>summary::-webkit-details-marker{display:none}
+  .th{width:48px;height:48px;border-radius:8px;object-fit:cover;background:#efe4d4;flex:none;display:grid;place-items:center;color:var(--muted);font-size:11px}
+  .sum{flex:1;min-width:0}
+  .sum b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sum span{color:var(--muted);font-size:12.5px}
+  .pill{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px}
+  .pill.out{color:var(--danger);border:1px solid currentColor}
+  .pill.hid{color:var(--muted);border:1px solid currentColor}
+  .form{padding:4px 12px 14px;border-top:1px solid var(--line);display:grid;gap:10px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:560px){.g2{grid-template-columns:1fr}}
+  label.f{display:grid;gap:4px;font-size:12px;font-weight:600;color:var(--muted)}
+  .checks{display:flex;flex-wrap:wrap;gap:14px}
+  .checks label{display:flex;gap:6px;align-items:center;font-weight:500}
+  .photo{display:flex;gap:12px;align-items:center}
+  .photo .big{width:110px;height:110px;border-radius:10px;object-fit:cover;background:#efe4d4;display:grid;place-items:center;color:var(--muted);font-size:12px;flex:none}
+  .vrow{display:grid;grid-template-columns:1fr 1fr 110px auto;gap:6px;align-items:center}
+  @media(max-width:560px){.vrow{grid-template-columns:1fr 1fr}}
+  .row-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:space-between}
+  .hint{font-size:12px;color:var(--muted)}
+  .pending{margin-top:18px}
+  .pending li{margin:4px 0}
+  .catrow{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;padding:10px;align-items:center}
+  .empty{color:var(--muted);text-align:center;padding:30px}
+  h3{margin:18px 0 8px;font-size:15px}
+  ol.steps{padding-left:20px;margin:6px 0} ol.steps li{margin:3px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Bryton Menu Editor</h1>
+  <button class="btn" id="loadSite">Load from site</button>
+  <label class="btn">Open file<input type="file" id="openFile" accept=".json,application/json" hidden></label>
+  <button class="btn primary" id="saveAll">Download changes</button>
+</header>
+<main>
+  <div class="status" id="status">Loading…</div>
+  <div class="tabs">
+    <button data-tab="items" class="on">Items</button>
+    <button data-tab="cats">Categories</button>
+    <button data-tab="cafe">Café info</button>
+    <button data-tab="help">How to publish</button>
+  </div>
+  <div id="view"></div>
+</main>
+
+<script>
+let M = null, tab="items", filterCat="all", openId=null;
+const photos = {};          // path -> {blob,url}
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const rp = n=>"Rp "+Number(n||0).toLocaleString("id-ID");
+const slug = s=>String(s||"").toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g,"").trim().replace(/[\s_]+/g,"-").replace(/-+/g,"-").slice(0,40)||"item";
+const TAGS = {bestseller:"Best seller",new:"New",spicy:"Spicy"};
+
+function status(msg, ok){ const s=$("#status"); s.textContent=msg; s.className="status"+(ok?" ok":""); }
+function saveDraft(){ try{ localStorage.setItem("bryton-menu-draft", JSON.stringify(M)); }catch(e){} }
+function blank(){ return {cafe:{name:"Bryton Café",logo:"images/logo.png",tagline:{id:"",en:""},note:{id:"",en:""}},categories:[],items:[]}; }
+function normalize(d){
+  d.cafe = d.cafe||{}; d.categories=d.categories||[]; d.items=d.items||[];
+  ["tagline","note"].forEach(k=>{ if(typeof d.cafe[k]!=="object"||!d.cafe[k]) d.cafe[k]={id:d.cafe[k]||"",en:""}; });
+  d.items.forEach(it=>{ it.name=it.name||{id:"",en:""}; it.description=it.description||{id:"",en:""}; it.tags=it.tags||[]; if(it.available===undefined) it.available=true; });
+  return d;
+}
+function imgSrc(p){ return photos[p]?photos[p].url:p; }
+
+async function loadSite(){
+  try{
+    const r = await fetch("menu.json?v="+Date.now(),{cache:"no-store"}); if(!r.ok) throw 0;
+    M = normalize(await r.json()); saveDraft(); render(); status("Loaded the current menu from the website. Edit below, then tap “Download changes”.", true);
+  }catch(e){
+    M = M || blank(); render();
+    status("Couldn't load menu.json from this site (normal if you opened this file directly on your computer). Use “Open file” to load your menu.json.");
+  }
+}
+(function init(){
+  let draft=null; try{ draft=JSON.parse(localStorage.getItem("bryton-menu-draft")||"null"); }catch(e){}
+  if(draft && confirm("You have unsaved edits from last time. Continue editing them?\n\nOK = continue draft · Cancel = load the live menu")){
+    M=normalize(draft); render(); status("Continuing your saved draft. Remember to download & upload when done.");
+  } else loadSite();
+})();
+
+$("#loadSite").onclick=()=>{ if(!M||confirm("Replace current edits with the live menu from the website?")) loadSite(); };
+$("#openFile").onchange=async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  try{ M=normalize(JSON.parse(await f.text())); saveDraft(); render(); status("Opened "+f.name+".", true); }
+  catch(err){ alert("That file isn't a valid menu.json"); }
+  e.target.value="";
+};
+document.querySelector(".tabs").onclick=e=>{ const b=e.target.closest("button"); if(!b) return; tab=b.dataset.tab; document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b)); render(); };
+
+function download(blob,name){ const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); }
+$("#saveAll").onclick=()=>{
+  const problems=[];
+  M.items.forEach(it=>{ if(!it.name.id&&!it.name.en) problems.push("An item has no name"); if(!M.categories.find(c=>c.id===it.category)) problems.push(`“${it.name.id||it.name.en}” has no category`); });
+  if(problems.length && !confirm("Please check:\n• "+[...new Set(problems)].join("\n• ")+"\n\nDownload anyway?")) return;
+  download(new Blob([JSON.stringify(M,null,2)],{type:"application/json"}),"menu.json");
+  const used=new Set(M.items.map(i=>i.image));
+  const list=Object.keys(photos).filter(p=>used.has(p));
+  list.forEach((p,i)=>setTimeout(()=>download(photos[p].blob,p.split("/").pop()),400*(i+1)));
+  status(`Downloaded menu.json${list.length?` and ${list.length} photo(s)`:""}. Now upload them to GitHub — see “How to publish”.`, true);
+};
+
+/* ---------- photo resize ---------- */
+function resizePhoto(file){
+  return new Promise((res,rej)=>{
+    const img=new Image(); img.onload=()=>{
+      const max=900, s=Math.min(1,max/Math.max(img.width,img.height));
+      const c=document.createElement("canvas"); c.width=Math.round(img.width*s); c.height=Math.round(img.height*s);
+      c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      c.toBlob(b=>b?res(b):rej(),"image/jpeg",0.82); URL.revokeObjectURL(img.src);
+    }; img.onerror=rej; img.src=URL.createObjectURL(file);
+  });
+}
+
+/* ---------- render ---------- */
+function render(){
+  const v=$("#view"); if(!M){ v.innerHTML=""; return; }
+  if(tab==="items") v.innerHTML=itemsView();
+  if(tab==="cats") v.innerHTML=catsView();
+  if(tab==="cafe") v.innerHTML=cafeView();
+  if(tab==="help") v.innerHTML=helpView();
+}
+function catName(id){ const c=M.categories.find(c=>c.id===id); return c?(c.name.id||c.name.en):"— no category —"; }
+
+function itemsView(){
+  const list=M.items.map((it,i)=>({it,i})).filter(x=>filterCat==="all"||x.it.category===filterCat);
+  const pend=Object.keys(photos).filter(p=>M.items.some(i=>i.image===p));
+  return `
+  <div class="tools">
+    <select data-act="filter"><option value="all">All categories (${M.items.length})</option>${M.categories.map(c=>`<option value="${esc(c.id)}" ${filterCat===c.id?"selected":""}>${esc(c.name.id||c.name.en)} (${M.items.filter(i=>i.category===c.id).length})</option>`).join("")}</select>
+    <button class="btn primary" data-act="add">+ Add item</button>
+  </div>
+  ${list.length?list.map(({it,i})=>itemCard(it,i)).join(""):`<div class="empty">No items yet. Tap “+ Add item”.</div>`}
+  ${pend.length?`<div class="pending status"><b>New photos not yet uploaded (${pend.length}):</b><ul>${pend.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>They download together with menu.json. Upload them into the <b>images</b> folder on GitHub.</div>`:""}`;
+}
+function itemCard(it,i){
+  const price = it.variants&&it.variants.length ? it.variants.map(v=>`${v.name.id||v.name.en} ${rp(v.price)}`).join(" · ") : rp(it.price);
+  return `<details class="card" data-i="${i}" ${openId===it.id?"open":""}>
+    <summary>
+      ${it.image?`<img class="th" src="${esc(imgSrc(it.image))}" onerror="this.outerHTML='<div class=th>no img</div>'">`:`<div class="th">no photo</div>`}
+      <div class="sum"><b>${esc(it.name.id||it.name.en||"(no name)")}</b><span>${esc(catName(it.category))} · ${esc(price)}</span></div>
+      ${it.hidden?`<span class="pill hid">HIDDEN</span>`:it.available===false?`<span class="pill out">SOLD OUT</span>`:""}
+    </summary>
+    <div class="form">
+      <div class="photo">
+        ${it.image?`<img class="big" src="${esc(imgSrc(it.image))}" onerror="this.outerHTML='<div class=big>photo not found</div>'">`:`<div class="big">no photo</div>`}
+        <div style="display:grid;gap:6px">
+          <label class="btn sm">${it.image?"Change photo":"Add photo"}<input type="file" accept="image/*" data-act="photo" hidden></label>
+          ${it.image?`<button class="btn sm danger" data-act="nophoto">Remove photo</button>`:""}
+          <span class="hint">${esc(it.image||"")}</span>
+        </div>
+      </div>
+      <div class="g2">
+        <label class="f">Name (Indonesia)<input type="text" data-f="name.id" value="${esc(it.name.id)}"></label>
+        <label class="f">Name (English)<input type="text" data-f="name.en" value="${esc(it.name.en)}"></label>
+        <label class="f">Description (Indonesia)<textarea data-f="description.id">${esc(it.description.id)}</textarea></label>
+        <label class="f">Description (English)<textarea data-f="description.en">${esc(it.description.en)}</textarea></label>
+        <label class="f">Category<select data-f="category" data-rerender="1">${M.categories.map(c=>`<option value="${esc(c.id)}" ${c.id===it.category?"selected":""}>${esc(c.name.id||c.name.en)}</option>`).join("")}</select></label>
+        ${it.variants&&it.variants.length?`<div class="hint" style="align-self:end">Price is set per option below.</div>`:`<label class="f">Price (Rp)<input type="number" inputmode="numeric" min="0" step="500" data-f="price" value="${Number(it.price)||0}"></label>`}
+      </div>
+      <div>
+        <div class="hint" style="margin-bottom:6px"><b>Options with different prices</b> (e.g. Hot / Iced, Regular / Large) — optional</div>
+        ${(it.variants||[]).map((v,vi)=>`<div class="vrow" style="margin-bottom:6px">
+          <input type="text" placeholder="Nama (ID)" data-v="${vi}" data-vf="id" value="${esc(v.name.id)}">
+          <input type="text" placeholder="Name (EN)" data-v="${vi}" data-vf="en" value="${esc(v.name.en)}">
+          <input type="number" inputmode="numeric" min="0" step="500" placeholder="Price" data-v="${vi}" data-vf="price" value="${Number(v.price)||0}">
+          <button class="btn sm danger" data-act="delv" data-vi="${vi}">✕</button></div>`).join("")}
+        <button class="btn sm" data-act="addv">+ Add option</button>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" data-f="available" ${it.available!==false?"checked":""} data-rerender="1"> Available (untick = Sold out)</label>
+        <label><input type="checkbox" data-f="hidden" ${it.hidden?"checked":""} data-rerender="1"> Hide from menu</label>
+        ${Object.entries(TAGS).map(([k,l])=>`<label><input type="checkbox" data-tag="${k}" ${it.tags.includes(k)?"checked":""}> ${l}</label>`).join("")}
+      </div>
+      <div class="row-actions">
+        <div style="display:flex;gap:6px"><button class="btn sm" data-act="up">↑ Move up</button><button class="btn sm" data-act="down">↓ Move down</button></div>
+        <button class="btn sm danger" data-act="del">Delete item</button>
+      </div>
+    </div>
+  </details>`;
+}
+function catsView(){
+  return `<p class="hint">Categories show as tabs on the menu, in this order.</p>
+  ${M.categories.map((c,i)=>`<div class="card"><div class="catrow" data-ci="${i}">
+    <input type="text" placeholder="Nama (ID)" data-cf="id" value="${esc(c.name.id)}">
+    <input type="text" placeholder="Name (EN)" data-cf="en" value="${esc(c.name.en)}">
+    <div style="display:flex;gap:4px"><button class="btn sm" data-act="cup">↑</button><button class="btn sm" data-act="cdown">↓</button><button class="btn sm danger" data-act="cdel">✕</button></div>
+  </div></div>`).join("")}
+  <button class="btn primary" data-act="cadd">+ Add category</button>`;
+}
+function cafeView(){
+  const c=M.cafe;
+  return `<div class="card form" style="border-top:1px solid var(--line);padding-top:14px">
+    <label class="f">Café name<input type="text" data-cafe="name" value="${esc(c.name)}"></label>
+    <label class="f">Logo file path<input type="text" data-cafe="logo" value="${esc(c.logo||"")}"><span class="hint">Upload your logo to GitHub as images/logo.png (square works best).</span></label>
+    <div class="g2">
+      <label class="f">Tagline (Indonesia)<input type="text" data-cafe="tagline.id" value="${esc(c.tagline.id)}"></label>
+      <label class="f">Tagline (English)<input type="text" data-cafe="tagline.en" value="${esc(c.tagline.en)}"></label>
+      <label class="f">Bottom note (Indonesia)<textarea data-cafe="note.id">${esc(c.note.id)}</textarea></label>
+      <label class="f">Bottom note (English)<textarea data-cafe="note.en">${esc(c.note.en)}</textarea></label>
+    </div></div>`;
+}
+function helpView(){
+  return `<div class="card form" style="border-top:1px solid var(--line);padding-top:14px">
+    <h3 style="margin-top:0">After editing</h3>
+    <ol class="steps">
+      <li>Tap <b>Download changes</b>. You get <b>menu.json</b> plus any new photos (.jpg).</li>
+      <li>Open your menu repository on <b>github.com</b>.</li>
+      <li><b>Photos:</b> open the <b>images</b> folder → <b>Add file → Upload files</b> → select the new .jpg files → <b>Commit changes</b>.</li>
+      <li><b>Menu:</b> go back to the main folder → <b>Add file → Upload files</b> → select <b>menu.json</b> → <b>Commit changes</b> (it replaces the old one).</li>
+      <li>Wait about 1 minute, then refresh the menu on your phone.</li>
+    </ol>
+    <p class="hint">Photos are automatically resized to max 900px so the menu loads fast on mobile data. Your edits are kept in this browser as a draft until you load the live menu again.</p>
+  </div>`;
+}
+
+/* ---------- events ---------- */
+function setPath(obj,path,val){ const k=path.split("."); let o=obj; while(k.length>1){ const p=k.shift(); o[p]=o[p]||{}; o=o[p]; } o[k[0]]=val; }
+const view=$("#view");
+view.addEventListener("toggle",e=>{ const d=e.target; if(d.tagName==="DETAILS"){ const it=M.items[+d.dataset.i]; if(d.open) openId=it.id; else if(openId===it.id) openId=null; } },true);
+view.addEventListener("input",e=>{
+  const t=e.target, card=t.closest("[data-i]");
+  if(card && t.dataset.f){
+    const it=M.items[+card.dataset.i], f=t.dataset.f;
+    let val = t.type==="checkbox"?t.checked : t.type==="number"?Number(t.value)||0 : t.value;
+    if(f==="hidden" && !val){ delete it.hidden; } else setPath(it,f,val);
+    if(f==="name.en"||f==="name.id"){ card.querySelector(".sum b").textContent=it.name.id||it.name.en||"(no name)"; }
+    if(t.dataset.rerender) render();
+  }
+  if(card && t.dataset.tag){ const it=M.items[+card.dataset.i]; it.tags=it.tags.filter(x=>x!==t.dataset.tag); if(t.checked) it.tags.push(t.dataset.tag); }
+  if(card && t.dataset.v!==undefined){ const v=M.items[+card.dataset.i].variants[+t.dataset.v]; if(t.dataset.vf==="price") v.price=Number(t.value)||0; else v.name[t.dataset.vf]=t.value; }
+  const cr=t.closest("[data-ci]"); if(cr && t.dataset.cf){ M.categories[+cr.dataset.ci].name[t.dataset.cf]=t.value; }
+  if(t.dataset.cafe) setPath(M.cafe,t.dataset.cafe,t.value);
+  if(t.dataset.act==="filter"){ filterCat=t.value; render(); }
+  saveDraft();
+});
+view.addEventListener("change",async e=>{
+  const t=e.target; if(t.dataset.act!=="photo"||!t.files[0]) return;
+  const it=M.items[+t.closest("[data-i]").dataset.i];
+  try{
+    const blob=await resizePhoto(t.files[0]);
+    const path=`images/${slug(it.name.en||it.name.id||it.id)}-${Date.now().toString(36)}.jpg`;
+    photos[path]={blob,url:URL.createObjectURL(blob)}; it.image=path; openId=it.id; saveDraft(); render();
+    status("Photo added. It will download with menu.json when you tap “Download changes”.");
+  }catch(err){ alert("Couldn't read that photo. Try a JPG or PNG."); }
+});
+view.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]"); if(!b||b.tagName==="SELECT"||b.type==="file") return;
+  const a=b.dataset.act, card=b.closest("[data-i]"), i=card?+card.dataset.i:-1, it=card?M.items[i]:null;
+  const swap=(arr,x,y)=>{ if(y<0||y>=arr.length) return; [arr[x],arr[y]]=[arr[y],arr[x]]; };
+  if(a==="add"){
+    const cat = filterCat!=="all"?filterCat:(M.categories[0]?.id||"");
+    const n={id:"item-"+Date.now().toString(36),category:cat,name:{id:"",en:""},description:{id:"",en:""},price:0,image:"",tags:[],available:true};
+    M.items.push(n); openId=n.id; render();
+    setTimeout(()=>{ const d=document.querySelector(`details[data-i="${M.items.length-1}"]`); d&&d.scrollIntoView({behavior:"smooth",block:"center"}); d&&d.querySelector('[data-f="name.id"]').focus(); },50);
+  }
+  if(a==="del" && confirm(`Delete “${it.name.id||it.name.en||"this item"}”?\n\nTip: to remove it only for today, untick “Available” instead.`)){ M.items.splice(i,1); render(); }
+  if(a==="up"){ swap(M.items,i,i-1); render(); }
+  if(a==="down"){ swap(M.items,i,i+1); render(); }
+  if(a==="nophoto"){ it.image=""; render(); }
+  if(a==="addv"){ it.variants=it.variants||[]; it.variants.push({name:{id:"",en:""},price:Number(it.price)||0}); render(); }
+  if(a==="delv"){ it.variants.splice(+b.dataset.vi,1); if(!it.variants.length) delete it.variants; render(); }
+  const ci=b.closest("[data-ci]")?+b.closest("[data-ci]").dataset.ci:-1;
+  if(a==="cadd"){ const name=prompt("Category name (Indonesia):"); if(name){ let id=slug(name),k=2; while(M.categories.some(c=>c.id===id)) id=slug(name)+"-"+k++; M.categories.push({id,name:{id:name,en:""}}); render(); } }
+  if(a==="cup"){ swap(M.categories,ci,ci-1); render(); }
+  if(a==="cdown"){ swap(M.categories,ci,ci+1); render(); }
+  if(a==="cdel"){ const c=M.categories[ci], n=M.items.filter(x=>x.category===c.id).length;
+    if(n){ alert(`“${c.name.id||c.name.en}” still has ${n} item(s). Move or delete them first.`); return; }
+    if(confirm("Delete this category?")){ M.categories.splice(ci,1); render(); } }
+  saveDraft();
+});
+</script>
+</body>
+</html>

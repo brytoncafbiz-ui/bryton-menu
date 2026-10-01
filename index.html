@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menu · Bryton Café</title>
+<meta name="theme-color" content="#2b1d14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f1e8; --surface:#fffaf3; --ink:#2b1d14; --muted:#7a6656; --line:#e8dccb;
+    --accent:#c8742c; --accent-ink:#fff; --chip:#efe4d4; --soldout:#a33b2b;
+    --hero1:#2b1d14; --hero2:#5a3420; --shadow:0 1px 2px rgba(43,29,20,.06),0 4px 14px rgba(43,29,20,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#17110c; --surface:#221912; --ink:#f3e9dc; --muted:#b39e8a; --line:#3a2b20;
+      --accent:#e3954f; --accent-ink:#1a120c; --chip:#2e231a; --soldout:#ef7b66;
+      --hero1:#0f0a07; --hero2:#3b2215; --shadow:none;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-padding-top:120px}
+  body{background:var(--bg);color:var(--ink);font:15px/1.45 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+  /* Hero */
+  .hero{background:radial-gradient(120% 140% at 50% 0%,var(--hero2) 0%,var(--hero1) 70%);color:#f7ead8;padding:28px 0 26px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;left:50%;bottom:-160px;width:320px;height:320px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(232,150,70,.35),transparent 65%);pointer-events:none}
+  .hero .wrap{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+  .logo{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#3b2518;flex:none;border:2px solid rgba(255,220,180,.25)}
+  .logo-fallback{display:grid;place-items:center;font:700 26px Fraunces,serif;color:#f2b46e}
+  .brand{flex:1;min-width:0}
+  .brand h1{font:700 26px/1.1 Fraunces,Georgia,serif;letter-spacing:.2px}
+  .brand p{color:#d9c3a8;font-size:13.5px;margin-top:3px}
+  .lang{display:flex;background:rgba(255,255,255,.1);border-radius:999px;padding:3px;flex:none}
+  .lang button{padding:6px 11px;border-radius:999px;font-size:12.5px;font-weight:600;color:#e8d5bd;letter-spacing:.4px}
+  .lang button[aria-pressed="true"]{background:#f7ead8;color:#2b1d14}
+
+  /* Sticky bar */
+  .bar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:12px}
+  .search{position:relative}
+  .search input{width:100%;padding:11px 14px 11px 40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:16px;outline:none}
+  .search input:focus{border-color:var(--accent)}
+  .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+  .cats{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
+  .cats::-webkit-scrollbar{display:none}
+  .cats button{flex:none;padding:7px 14px;border-radius:999px;background:var(--chip);font-size:14px;font-weight:500;white-space:nowrap;transition:background .15s}
+  .cats button.active{background:var(--ink);color:var(--bg)}
+
+  /* Sections */
+  section{padding-top:22px}
+  section h2{font:700 21px Fraunces,Georgia,serif;margin-bottom:12px;display:flex;align-items:baseline;gap:8px}
+  section h2 small{font:500 13px Inter,sans-serif;color:var(--muted)}
+  .list{display:grid;gap:10px}
+  .item{display:flex;gap:13px;align-items:stretch;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;box-shadow:var(--shadow)}
+  .item:active{transform:scale(.995)}
+  .thumb{width:96px;height:96px;flex:none;border-radius:12px;overflow:hidden;position:relative;background:var(--chip)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .ph{width:100%;height:100%;display:grid;place-items:center;color:var(--muted);background:linear-gradient(135deg,var(--chip),var(--line))}
+  .info{flex:1;min-width:0;display:flex;flex-direction:column;padding:2px 2px 2px 0}
+  .info h3{font-size:15.5px;font-weight:600;line-height:1.3}
+  .info p{color:var(--muted);font-size:13px;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .row{margin-top:auto;padding-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .price{font-weight:700;font-size:15px;color:var(--accent)}
+  .price small{font-weight:500;color:var(--muted);font-size:12px;margin-right:3px}
+  .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+  .tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--ink);letter-spacing:.2px}
+  .tag.bestseller{background:#f6dcc0;color:#7a3d0e}
+  .tag.new{background:#d8ecd9;color:#235c2b}
+  .tag.spicy{background:#f7d4cd;color:#8e2716}
+  @media (prefers-color-scheme: dark){
+    .tag.bestseller{background:#4a2e17;color:#f6c48e}.tag.new{background:#1f3a23;color:#9fd8a6}.tag.spicy{background:#4a1f17;color:#f3a090}
+  }
+  .soldout .thumb img,.soldout .ph{filter:grayscale(1);opacity:.55}
+  .soldout .info h3,.soldout .price{opacity:.6}
+  .badge-out{font-size:11.5px;font-weight:700;color:var(--soldout);border:1px solid currentColor;border-radius:6px;padding:1px 7px;text-transform:uppercase;letter-spacing:.5px}
+
+  .empty{text-align:center;color:var(--muted);padding:50px 0}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;padding:30px 16px 40px;line-height:1.6}
+
+  /* Sheet */
+  .scrim{position:fixed;inset:0;background:rgba(15,10,7,.55);z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-width:720px;margin:0 auto;background:var(--surface);border-radius:22px 22px 0 0;max-height:92vh;overflow:auto;transform:translateY(100%);transition:transform .25s ease;padding-bottom:env(safe-area-inset-bottom)}
+  .sheet.open{transform:none}
+  .sheet .hero-img{aspect-ratio:4/3;background:var(--chip);position:relative}
+  .sheet .hero-img.noimg{aspect-ratio:3/1}
+  .sheet .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .sheet .close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;display:grid;place-items:center}
+  .sheet .body{padding:18px 18px 26px}
+  .sheet h3{font:700 23px/1.2 Fraunces,Georgia,serif}
+  .sheet .desc{color:var(--muted);margin-top:8px;font-size:14.5px}
+  .variants{margin-top:16px;border-top:1px solid var(--line)}
+  .variants div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}
+  .variants b{color:var(--accent)}
+  .sheet .big-price{margin-top:16px;font-size:20px;font-weight:700;color:var(--accent)}
+  .loading{padding:60px 0;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div id="logoBox"></div>
+    <div class="brand"><h1 id="cafeName">Bryton Café</h1><p id="tagline"></p></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="id">ID</button><button data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off">
+    </label>
+    <nav class="cats" id="cats"></nav>
+  </div>
+</div>
+
+<main class="wrap" id="menu"><div class="loading">Memuat menu…</div></main>
+<footer id="foot"></footer>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+
+<script>
+const T = {
+  id:{search:"Cari menu…",soldout:"Habis",from:"mulai",empty:"Menu tidak ditemukan.",items:"menu",
+      tags:{bestseller:"Terlaris",new:"Baru",spicy:"Pedas"},error:"Menu gagal dimuat. Coba refresh halaman."},
+  en:{search:"Search menu…",soldout:"Sold out",from:"from",empty:"No items found.",items:"items",
+      tags:{bestseller:"Best seller",new:"New",spicy:"Spicy"},error:"Couldn't load the menu. Please refresh."}
+};
+let MENU=null, lang="id", query="";
+try{ lang = localStorage.getItem("bryton-lang") || ((navigator.language||"").startsWith("id")?"id":"en"); }catch(e){}
+if(!T[lang]) lang="id";
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const tx = v => v==null ? "" : (typeof v==="string" ? v : (v[lang] || v.id || v.en || ""));
+const rp = n => "Rp " + Number(n||0).toLocaleString("id-ID");
+const cupIcon = '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg>';
+
+function priceHTML(it){
+  if(it.variants && it.variants.length){
+    const min = Math.min(...it.variants.map(v=>Number(v.price)||0));
+    return `<small>${T[lang].from}</small>${rp(min)}`;
+  }
+  return rp(it.price);
+}
+function imgHTML(it){
+  return it.image
+    ? `<img src="${esc(it.image)}" alt="${esc(tx(it.name))}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:cupIcon}))">`
+    : `<div class="ph">${cupIcon}</div>`;
+}
+function tagsHTML(it){
+  const tags=(it.tags||[]).filter(t=>T[lang].tags[t]);
+  return tags.length ? `<div class="tags">${tags.map(t=>`<span class="tag ${t}">${T[lang].tags[t]}</span>`).join("")}</div>` : "";
+}
+
+function render(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===lang));
+  $("#q").placeholder = T[lang].search;
+  if(!MENU) return;
+  const c = MENU.cafe||{};
+  $("#cafeName").textContent = c.name || "Bryton Café";
+  $("#tagline").textContent = tx(c.tagline);
+  $("#foot").textContent = tx(c.note);
+  document.title = "Menu · " + (c.name||"Bryton Café");
+
+  const q = query.trim().toLowerCase();
+  const visible = (MENU.items||[]).filter(it=>!it.hidden).filter(it=>{
+    if(!q) return true;
+    return [it.name?.id,it.name?.en,it.description?.id,it.description?.en].join(" ").toLowerCase().includes(q);
+  });
+  const cats = (MENU.categories||[]).map(cat=>({cat,items:visible.filter(i=>i.category===cat.id)})).filter(g=>g.items.length);
+
+  $("#cats").innerHTML = cats.map((g,i)=>`<button data-cat="${esc(g.cat.id)}" class="${i===0?"active":""}">${esc(tx(g.cat.name))}</button>`).join("");
+  $("#menu").innerHTML = cats.length ? cats.map(g=>`
+    <section id="cat-${esc(g.cat.id)}" data-cat="${esc(g.cat.id)}">
+      <h2>${esc(tx(g.cat.name))} <small>${g.items.length} ${T[lang].items}</small></h2>
+      <div class="list">${g.items.map(it=>`
+        <button class="item ${it.available===false?"soldout":""}" data-id="${esc(it.id)}">
+          <div class="thumb">${imgHTML(it)}</div>
+          <div class="info">
+            <h3>${esc(tx(it.name))}</h3>
+            ${tx(it.description)?`<p>${esc(tx(it.description))}</p>`:""}
+            ${tagsHTML(it)}
+            <div class="row"><span class="price">${priceHTML(it)}</span>${it.available===false?`<span class="badge-out">${T[lang].soldout}</span>`:""}</div>
+          </div>
+        </button>`).join("")}
+      </div>
+    </section>`).join("") : `<div class="empty">${T[lang].empty}</div>`;
+  observe();
+}
+
+let io;
+function observe(){
+  io && io.disconnect();
+  io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) setActive(e.target.dataset.cat); });
+  },{rootMargin:"-130px 0px -65% 0px"});
+  document.querySelectorAll("section[data-cat]").forEach(s=>io.observe(s));
+}
+function setActive(id){
+  document.querySelectorAll("#cats button").forEach(b=>{
+    const on=b.dataset.cat===id; b.classList.toggle("active",on);
+    if(on) b.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
+  });
+}
+
+function openItem(id){
+  const it = MENU.items.find(i=>i.id===id); if(!it) return;
+  const out = it.available===false;
+  $("#sheet").innerHTML = `
+    <div class="hero-img ${it.image?"":"noimg"}">${imgHTML(it)}<button class="close" aria-label="Close">✕</button></div>
+    <div class="body">
+      <h3>${esc(tx(it.name))}</h3>
+      ${tagsHTML(it)}
+      ${tx(it.description)?`<p class="desc">${esc(tx(it.description))}</p>`:""}
+      ${it.variants&&it.variants.length
+        ? `<div class="variants">${it.variants.map(v=>`<div><span>${esc(tx(v.name))}</span><b>${rp(v.price)}</b></div>`).join("")}</div>`
+        : `<div class="big-price">${rp(it.price)}</div>`}
+      ${out?`<p style="margin-top:14px"><span class="badge-out">${T[lang].soldout}</span></p>`:""}
+    </div>`;
+  $("#sheet").classList.add("open"); $("#scrim").classList.add("open");
+}
+function closeItem(){ $("#sheet").classList.remove("open"); $("#scrim").classList.remove("open"); }
+
+document.addEventListener("click",e=>{
+  const l=e.target.closest(".lang button");
+  if(l){ lang=l.dataset.lang; try{localStorage.setItem("bryton-lang",lang)}catch(_){}; render(); return; }
+  const c=e.target.closest("#cats button");
+  if(c){ document.getElementById("cat-"+c.dataset.cat)?.scrollIntoView({behavior:"smooth"}); setActive(c.dataset.cat); return; }
+  const it=e.target.closest(".item");
+  if(it){ openItem(it.dataset.id); return; }
+  if(e.target.closest(".close") || e.target.id==="scrim") closeItem();
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeItem(); });
+$("#q").addEventListener("input",e=>{ query=e.target.value; render(); });
+
+function setLogo(src){
+  const box=$("#logoBox");
+  const fallback=()=>box.innerHTML='<div class="logo logo-fallback">B</div>';
+  if(!src) return fallback();
+  const img=new Image(); img.className="logo"; img.alt=""; img.onerror=fallback; img.src=src;
+  box.innerHTML=""; box.appendChild(img);
+}
+
+render();
+fetch("menu.json?v="+Date.now(),{cache:"no-store"})
+  .then(r=>{ if(!r.ok) throw 0; return r.json(); })
+  .then(d=>{ MENU=d; setLogo(d.cafe&&d.cafe.logo); render(); })
+  .catch(()=>{ setLogo(""); $("#menu").innerHTML=`<div class="empty">${T[lang].error}</div>`; });
+</script>
+</body>
+</html>

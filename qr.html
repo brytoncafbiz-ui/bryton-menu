@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Menu QR Code · Bryton Café</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<script src="qrcode.js"></script>
+<style>
+  body{margin:0;background:#f6f2ec;color:#2b1d14;font:14px/1.45 Inter,system-ui,sans-serif}
+  .controls{max-width:520px;margin:0 auto;padding:16px;display:grid;gap:10px}
+  input{font:inherit;padding:10px;border:1px solid #e4d8c8;border-radius:9px;width:100%;box-sizing:border-box}
+  .btns{display:flex;gap:8px}
+  button{flex:1;font:inherit;font-weight:600;padding:10px;border-radius:9px;border:1px solid #c8742c;background:#c8742c;color:#fff;cursor:pointer}
+  button.alt{background:#fff;color:#2b1d14;border-color:#e4d8c8}
+  .card{width:340px;margin:10px auto 30px;background:#2b1d14;color:#f7ead8;border-radius:22px;padding:28px 26px 24px;text-align:center}
+  .card h1{font:700 28px Fraunces,Georgia,serif;margin:0}
+  .card .sub{color:#e8a868;font-weight:600;letter-spacing:2px;font-size:12px;margin-top:4px}
+  .qrbox{background:#fff;border-radius:14px;padding:16px;margin:20px auto 16px;width:max-content}
+  .qrbox img,.qrbox canvas{display:block}
+  .card .l1{font-weight:600;font-size:16px}
+  .card .l2{color:#cdb69b;font-size:13px}
+  @media print{ .controls{display:none} body{background:#fff} .card{margin-top:40px;-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+</style>
+</head>
+<body>
+<div class="controls">
+  <b>Menu link</b>
+  <input id="url">
+  <div class="btns"><button id="dl">Download PNG</button><button class="alt" onclick="print()">Print</button></div>
+</div>
+<div class="card">
+  <h1>Bryton Café</h1>
+  <div class="sub">MENU</div>
+  <div class="qrbox"><div id="qr"></div></div>
+  <div class="l1">Scan untuk lihat menu</div>
+  <div class="l2">Scan to view our menu</div>
+</div>
+<script>
+const input=document.getElementById("url");
+input.value = location.href.replace(/qr\.html.*$/,"");
+let qrCanvas;
+function draw(){
+  const q=qrcode(0,"M"); q.addData(input.value.trim()||" "); q.make();
+  const n=q.getModuleCount(), cell=Math.floor(600/n), size=n*cell;
+  const c=document.createElement("canvas"); c.width=c.height=size; const g=c.getContext("2d");
+  g.fillStyle="#fff"; g.fillRect(0,0,size,size); g.fillStyle="#2b1d14";
+  for(let r=0;r<n;r++) for(let k=0;k<n;k++) if(q.isDark(r,k)) g.fillRect(k*cell,r*cell,cell,cell);
+  c.style.width=c.style.height="240px"; qrCanvas=c;
+  const box=document.getElementById("qr"); box.innerHTML=""; box.appendChild(c);
+}
+input.addEventListener("input",draw); draw();
+
+document.getElementById("dl").onclick=async()=>{
+  await document.fonts.ready;
+  const src=qrCanvas;
+  const W=1000,H=1350,c=document.createElement("canvas"); c.width=W; c.height=H; const g=c.getContext("2d");
+  g.fillStyle="#2b1d14"; roundRect(g,0,0,W,H,60); g.fill();
+  g.textAlign="center";
+  g.fillStyle="#f7ead8"; g.font="700 84px Fraunces, Georgia, serif"; g.fillText("Bryton Café",W/2,170);
+  g.fillStyle="#e8a868"; g.font="600 34px Inter, sans-serif"; g.fillText("M E N U",W/2,230);
+  g.fillStyle="#fff"; roundRect(g,170,300,660,660,40); g.fill();
+  g.imageSmoothingEnabled=false; g.drawImage(src,210,340,580,580);
+  g.fillStyle="#f7ead8"; g.font="600 46px Inter, sans-serif"; g.fillText("Scan untuk lihat menu",W/2,1080);
+  g.fillStyle="#cdb69b"; g.font="500 36px Inter, sans-serif"; g.fillText("Scan to view our menu",W/2,1140);
+  c.toBlob(b=>{ const a=document.createElement("a"); a.href=URL.createObjectURL(b); a.download="bryton-menu-qr.png"; a.click(); });
+};
+function roundRect(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+</script>
+</body>
+</html>
