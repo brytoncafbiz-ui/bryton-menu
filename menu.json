@@ -179,7 +179,7 @@
       "price": 28000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
