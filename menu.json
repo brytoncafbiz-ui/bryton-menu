@@ -53,7 +53,7 @@
         "id": "",
         "en": ""
       },
-      "price": 25000,
+      "price": 23000,
       "image": "images/americano-mup38g26.jpg",
       "tags": [],
       "available": true,
@@ -63,14 +63,14 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Iced"
           },
-          "price": 2000
+          "extra": 2000
         }
       ]
     },
@@ -85,14 +85,14 @@
         "id": "",
         "en": ""
       },
-      "price": 0,
+      "price": 18000,
       "variants": [
         {
           "name": {
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 18000
+          "extra": 0
         }
       ],
       "image": "",
@@ -110,21 +110,21 @@
         "id": "",
         "en": ""
       },
-      "price": 0,
+      "price": 2000,
       "variants": [
         {
           "name": {
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Iced"
           },
-          "price": 2000
+          "extra": 2000
         }
       ],
       "image": "",
@@ -142,7 +142,7 @@
         "id": "Matcha Jepang dengan susu segar.",
         "en": "Japanese matcha with fresh milk."
       },
-      "price": 28000,
+      "price": 25000,
       "image": "images/cappucinno-muqihvxm.jpg",
       "tags": [
         "new"
@@ -154,14 +154,28 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Iced"
           },
-          "price": 2000
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Full Arabica",
+            "en": "Full Arabica"
+          },
+          "extra": 5000
+        },
+        {
+          "name": {
+            "id": "Xtra Sugar",
+            "en": "Xtra Sugar"
+          },
+          "extra": 3000
         }
       ]
     },
@@ -186,28 +200,28 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Iced"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra manis",
             "en": "Xtra sweet"
           },
-          "price": 3000
+          "extra": 3000
         },
         {
           "name": {
             "id": "Beans Arabica",
             "en": "Beans Arabica"
           },
-          "price": 5000
+          "extra": 5000
         }
       ]
     },
@@ -232,14 +246,14 @@
             "id": "Xtra gula",
             "en": "Xtra Sugar"
           },
-          "price": 3000
+          "extra": 3000
         },
         {
           "name": {
             "id": "Xtra cream",
             "en": "Xtra cream"
           },
-          "price": 5000
+          "extra": 5000
         }
       ]
     },
@@ -264,28 +278,28 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Ice"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra gula",
             "en": "Xtra Sugar"
           },
-          "price": 3000
+          "extra": 3000
         },
         {
           "name": {
             "id": "Xtra shot",
             "en": "Xtra shot"
           },
-          "price": 5000
+          "extra": 5000
         }
       ]
     },
@@ -310,14 +324,14 @@
             "id": "Xtra gula",
             "en": "Xtra Sugar"
           },
-          "price": 3000
+          "extra": 3000
         },
         {
           "name": {
             "id": "Xtra shot",
             "en": "Xtra shot"
           },
-          "price": 5000
+          "extra": 5000
         }
       ]
     },
@@ -344,28 +358,28 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Ice"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra gula",
             "en": "Xtra sugar"
           },
-          "price": 3000
+          "extra": 3000
         },
         {
           "name": {
             "id": "Xtra cream",
             "en": "Xtra xrean"
           },
-          "price": 5000
+          "extra": 5000
         }
       ]
     },
@@ -390,14 +404,14 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Ice"
           },
-          "price": 2000
+          "extra": 2000
         }
       ]
     },
@@ -422,14 +436,14 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Ice"
           },
-          "price": 2000
+          "extra": 2000
         }
       ]
     },
@@ -454,14 +468,14 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Ice"
           },
-          "price": 2000
+          "extra": 2000
         }
       ]
     },
@@ -486,21 +500,21 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Ice"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Manis",
             "en": "Sugar"
           },
-          "price": 500
+          "extra": 500
         }
       ]
     },
@@ -525,14 +539,14 @@
             "id": "Panas",
             "en": "Hot"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Dingin",
             "en": "Ice"
           },
-          "price": 2000
+          "extra": 2000
         }
       ]
     },
@@ -563,59 +577,38 @@
         "id": "",
         "en": ""
       },
-      "price": 22000,
+      "price": 25000,
       "image": "images/nasi-goreng-tek-tek-muqijksl.jpg",
       "tags": [],
       "available": true,
       "variants": [
         {
           "name": {
-            "id": "Telur Ceplok",
-            "en": "Telur Ceplok"
-          },
-          "price": 6000
-        },
-        {
-          "name": {
-            "id": "Telur Dadar",
-            "en": "Telur Dadar"
-          },
-          "price": 6000
-        },
-        {
-          "name": {
-            "id": "Telur Ceplok 1/2 matang",
-            "en": "Telur Ceplok 1/2 matang"
-          },
-          "price": 6000
-        },
-        {
-          "name": {
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas Sedang",
             "en": "Pedas Sedang"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas",
             "en": "Pedas"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "price": 4000
+          "extra": 4000
         }
       ]
     },
@@ -640,49 +633,49 @@
             "id": "Xtra telur ceplok",
             "en": "Xtra telur ceplok"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Xtra telur dadar",
             "en": "Xtra telur dadar"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Xtra telur ceplok 1/2 matang",
             "en": "Xtra telur ceplok 1/2 matang"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas Sedang",
             "en": "Pedas Sedang"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas",
             "en": "Pedas"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "price": 4000
+          "extra": 4000
         }
       ]
     },
@@ -697,7 +690,7 @@
         "id": "",
         "en": ""
       },
-      "price": 25000,
+      "price": 28000,
       "image": "",
       "tags": [],
       "available": true,
@@ -707,49 +700,49 @@
             "id": "Telur Ceplok",
             "en": "Telur Ceplok"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Telur Dadar",
             "en": "Telur Dadar"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Telur Ceplok 1/2 matang",
             "en": "Telur Ceplok 1/2 matang"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas Sedang",
             "en": "Pedas Sedang"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas",
             "en": "Pedas"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "price": 4000
+          "extra": 4000
         }
       ]
     },
@@ -774,28 +767,28 @@
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas Sedang",
             "en": "Pedas Sedang"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas",
             "en": "Pedas"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "price": 4000
+          "extra": 4000
         }
       ]
     },
@@ -820,28 +813,28 @@
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas Sedang",
             "en": "Pedas Sedang"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas",
             "en": "Pedas"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "price": 4000
+          "extra": 4000
         }
       ]
     },
@@ -866,28 +859,28 @@
             "id": "Tidak pedas",
             "en": "Tidak pedas"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas Sedang",
             "en": "Pedas Sedang"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas",
             "en": "Pedas"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "price": 4000
+          "extra": 4000
         }
       ]
     },
@@ -928,21 +921,21 @@
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Pedas",
             "en": "Pedas"
           },
-          "price": 2000
+          "extra": 2000
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "price": 4000
+          "extra": 4000
         }
       ]
     },
@@ -999,35 +992,35 @@
             "id": "Kornet",
             "en": "Kornet"
           },
-          "price": 5000
+          "extra": 5000
         },
         {
           "name": {
             "id": "Porsi Double",
             "en": "Porsi Double"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Varian Rasa Kari Ayam",
             "en": "Varian Kari Ayam"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Varian Mie Goreng",
             "en": "Varian Mie Goreng"
           },
-          "price": 0
+          "extra": 0
         },
         {
           "name": {
             "id": "Varian Soto",
             "en": "Varian Soto"
           },
-          "price": 0
+          "extra": 0
         }
       ]
     },
@@ -1052,14 +1045,14 @@
             "id": "Xtra Sambal Matah",
             "en": "Xtra Sambal Matah"
           },
-          "price": 6000
+          "extra": 6000
         },
         {
           "name": {
             "id": "Xtra Sambal Kecap",
             "en": "Xtra Sambal Kecap"
           },
-          "price": 6000
+          "extra": 6000
         }
       ]
     },
