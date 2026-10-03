@@ -44,8 +44,9 @@
   .checks label{display:flex;gap:6px;align-items:center;font-weight:500}
   .photo{display:flex;gap:12px;align-items:center}
   .photo .big{width:110px;height:110px;border-radius:10px;object-fit:cover;background:#efe4d4;display:grid;place-items:center;color:var(--muted);font-size:12px;flex:none}
-  .vrow{display:grid;grid-template-columns:1fr 1fr 110px auto;gap:6px;align-items:center}
-  @media(max-width:560px){.vrow{grid-template-columns:1fr 1fr}}
+  .vrow{display:grid;grid-template-columns:1fr 1fr 150px auto;gap:6px;align-items:center}
+  @media(max-width:560px){.vrow{grid-template-columns:1fr 1fr}.vrow .btn{justify-self:end}}
+  .amt{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--muted);white-space:nowrap}
   .row-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:space-between}
   .hint{font-size:12px;color:var(--muted)}
   .pending{margin-top:18px}
@@ -89,7 +90,16 @@ function blank(){ return {cafe:{name:"Bryton Café",logo:"images/logo.png",tagli
 function normalize(d){
   d.cafe = d.cafe||{}; d.categories=d.categories||[]; d.items=d.items||[];
   ["tagline","note"].forEach(k=>{ if(typeof d.cafe[k]!=="object"||!d.cafe[k]) d.cafe[k]={id:d.cafe[k]||"",en:""}; });
-  d.items.forEach(it=>{ it.name=it.name||{id:"",en:""}; it.description=it.description||{id:"",en:""}; it.tags=it.tags||[]; if(it.available===undefined) it.available=true; });
+  d.items.forEach(it=>{
+    // Convert old-style options (full price per option, base price 0) to base price + extra
+    if(it.variants&&it.variants.length&&it.variants.some(v=>v.extra===undefined)){
+      const prices=it.variants.map(v=>Number(v.price)||0);
+      let base=Number(it.price)||0;
+      if(!base) base=Math.min(...prices);
+      it.price=base;
+      it.variants.forEach((v,k)=>{ if(v.extra===undefined){ const p=prices[k]; v.extra = p>=base ? p-base : p; } delete v.price; });
+    }
+    it.name=it.name||{id:"",en:""}; it.description=it.description||{id:"",en:""}; it.tags=it.tags||[]; if(it.available===undefined) it.available=true; });
   return d;
 }
 function imgSrc(p){ return photos[p]?photos[p].url:p; }
@@ -165,7 +175,7 @@ function itemsView(){
   ${pend.length?`<div class="pending status"><b>New photos not yet uploaded (${pend.length}):</b><ul>${pend.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>They download together with menu.json. Upload them into the <b>images</b> folder on GitHub.</div>`:""}`;
 }
 function itemCard(it,i){
-  const price = it.variants&&it.variants.length ? it.variants.map(v=>`${v.name.id||v.name.en} ${rp(v.price)}`).join(" · ") : rp(it.price);
+  const price = rp(it.price) + (it.variants&&it.variants.length ? ` · ${it.variants.length} option${it.variants.length>1?"s":""}` : "");
   return `<details class="card" data-i="${i}" ${openId===it.id?"open":""}>
     <summary>
       ${it.image?`<img class="th" src="${esc(imgSrc(it.image))}" onerror="this.outerHTML='<div class=th>no img</div>'">`:`<div class="th">no photo</div>`}
@@ -187,14 +197,14 @@ function itemCard(it,i){
         <label class="f">Description (Indonesia)<textarea data-f="description.id">${esc(it.description.id)}</textarea></label>
         <label class="f">Description (English)<textarea data-f="description.en">${esc(it.description.en)}</textarea></label>
         <label class="f">Category<select data-f="category" data-rerender="1">${M.categories.map(c=>`<option value="${esc(c.id)}" ${c.id===it.category?"selected":""}>${esc(c.name.id||c.name.en)}</option>`).join("")}</select></label>
-        ${it.variants&&it.variants.length?`<div class="hint" style="align-self:end">Price is set per option below.</div>`:`<label class="f">Price (Rp)<input type="number" inputmode="numeric" min="0" step="500" data-f="price" value="${Number(it.price)||0}"></label>`}
+        <label class="f">Base price (Rp)<input type="number" inputmode="numeric" min="0" step="500" data-f="price" value="${Number(it.price)||0}"></label>
       </div>
       <div>
-        <div class="hint" style="margin-bottom:6px"><b>Options with different prices</b> (e.g. Hot / Iced, Regular / Large) — optional</div>
+        <div class="hint" style="margin-bottom:6px"><b>Options / add-ons</b> — optional. Enter only the <b>extra</b> charge on top of the base price (e.g. Iced +2000, Extra shot +5000, Oat milk +6000). Use 0 if there's no extra charge.</div>
         ${(it.variants||[]).map((v,vi)=>`<div class="vrow" style="margin-bottom:6px">
           <input type="text" placeholder="Nama (ID)" data-v="${vi}" data-vf="id" value="${esc(v.name.id)}">
           <input type="text" placeholder="Name (EN)" data-v="${vi}" data-vf="en" value="${esc(v.name.en)}">
-          <input type="number" inputmode="numeric" min="0" step="500" placeholder="Price" data-v="${vi}" data-vf="price" value="${Number(v.price)||0}">
+          <label class="amt"><span>+ Rp</span><input type="number" inputmode="numeric" min="0" step="500" placeholder="0" title="Extra charge on top of base price" data-v="${vi}" data-vf="extra" value="${Number(v.extra)||0}"></label>
           <button class="btn sm danger" data-act="delv" data-vi="${vi}">✕</button></div>`).join("")}
         <button class="btn sm" data-act="addv">+ Add option</button>
       </div>
@@ -259,7 +269,7 @@ view.addEventListener("input",e=>{
     if(t.dataset.rerender) render();
   }
   if(card && t.dataset.tag){ const it=M.items[+card.dataset.i]; it.tags=it.tags.filter(x=>x!==t.dataset.tag); if(t.checked) it.tags.push(t.dataset.tag); }
-  if(card && t.dataset.v!==undefined){ const v=M.items[+card.dataset.i].variants[+t.dataset.v]; if(t.dataset.vf==="price") v.price=Number(t.value)||0; else v.name[t.dataset.vf]=t.value; }
+  if(card && t.dataset.v!==undefined){ const v=M.items[+card.dataset.i].variants[+t.dataset.v]; if(t.dataset.vf==="extra") v.extra=Number(t.value)||0; else v.name[t.dataset.vf]=t.value; }
   const cr=t.closest("[data-ci]"); if(cr && t.dataset.cf){ M.categories[+cr.dataset.ci].name[t.dataset.cf]=t.value; }
   if(t.dataset.cafe) setPath(M.cafe,t.dataset.cafe,t.value);
   if(t.dataset.act==="filter"){ filterCat=t.value; render(); }
@@ -289,7 +299,7 @@ view.addEventListener("click",e=>{
   if(a==="up"){ swap(M.items,i,i-1); render(); }
   if(a==="down"){ swap(M.items,i,i+1); render(); }
   if(a==="nophoto"){ it.image=""; render(); }
-  if(a==="addv"){ it.variants=it.variants||[]; it.variants.push({name:{id:"",en:""},price:Number(it.price)||0}); render(); }
+  if(a==="addv"){ it.variants=it.variants||[]; it.variants.push({name:{id:"",en:""},extra:0}); render(); }
   if(a==="delv"){ it.variants.splice(+b.dataset.vi,1); if(!it.variants.length) delete it.variants; render(); }
   const ci=b.closest("[data-ci]")?+b.closest("[data-ci]").dataset.ci:-1;
   if(a==="cadd"){ const name=prompt("Category name (Indonesia):"); if(name){ let id=slug(name),k=2; while(M.categories.some(c=>c.id===id)) id=slug(name)+"-"+k++; M.categories.push({id,name:{id:name,en:""}}); render(); } }

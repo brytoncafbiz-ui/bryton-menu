@@ -97,6 +97,9 @@
   .variants{margin-top:16px;border-top:1px solid var(--line)}
   .variants div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}
   .variants b{color:var(--accent)}
+  .variants .incl{color:var(--muted);font-weight:500;font-size:13px}
+  .opt-title{margin-top:18px;font-size:12px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+  .opt-title+.variants{margin-top:6px}
   .sheet .big-price{margin-top:16px;font-size:20px;font-weight:700;color:var(--accent)}
   .loading{padding:60px 0;text-align:center;color:var(--muted)}
 </style>
@@ -130,9 +133,9 @@
 
 <script>
 const T = {
-  id:{search:"Cari menu…",soldout:"Habis",from:"mulai",empty:"Menu tidak ditemukan.",items:"menu",
+  id:{search:"Cari menu…",soldout:"Habis",from:"mulai",options:"Pilihan tambahan",included:"termasuk",empty:"Menu tidak ditemukan.",items:"menu",
       tags:{bestseller:"Terlaris",new:"Baru",spicy:"Pedas"},error:"Menu gagal dimuat. Coba refresh halaman."},
-  en:{search:"Search menu…",soldout:"Sold out",from:"from",empty:"No items found.",items:"items",
+  en:{search:"Search menu…",soldout:"Sold out",from:"from",options:"Options",included:"included",empty:"No items found.",items:"items",
       tags:{bestseller:"Best seller",new:"New",spicy:"Spicy"},error:"Couldn't load the menu. Please refresh."}
 };
 let MENU=null, lang="id", query="";
@@ -145,8 +148,18 @@ const tx = v => v==null ? "" : (typeof v==="string" ? v : (v[lang] || v.id || v.
 const rp = n => "Rp " + Number(n||0).toLocaleString("id-ID");
 const cupIcon = '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg>';
 
+// Old menu.json format: options carried their own full price and the base price was 0.
+// New format: base price always applies; each option has an "extra" amount added on top.
+function isLegacy(it){ return !!(it.variants&&it.variants.length&&it.variants.every(v=>v.extra===undefined&&v.price!==undefined)&&!(Number(it.price)>0)); }
+function optionsHTML(it){
+  if(!it.variants||!it.variants.length) return "";
+  const legacy=isLegacy(it);
+  return `<div class="opt-title">${T[lang].options}</div><div class="variants">${it.variants.map(v=>{
+    const amt = legacy ? rp(v.price) : (Number(v.extra)>0 ? "+ "+rp(v.extra) : `<span class="incl">${T[lang].included}</span>`);
+    return `<div><span>${esc(tx(v.name))}</span><b>${amt}</b></div>`;}).join("")}</div>`;
+}
 function priceHTML(it){
-  if(it.variants && it.variants.length){
+  if(isLegacy(it)){
     const min = Math.min(...it.variants.map(v=>Number(v.price)||0));
     return `<small>${T[lang].from}</small>${rp(min)}`;
   }
@@ -223,9 +236,8 @@ function openItem(id){
       <h3>${esc(tx(it.name))}</h3>
       ${tagsHTML(it)}
       ${tx(it.description)?`<p class="desc">${esc(tx(it.description))}</p>`:""}
-      ${it.variants&&it.variants.length
-        ? `<div class="variants">${it.variants.map(v=>`<div><span>${esc(tx(v.name))}</span><b>${rp(v.price)}</b></div>`).join("")}</div>`
-        : `<div class="big-price">${rp(it.price)}</div>`}
+      ${isLegacy(it)?"":`<div class="big-price">${rp(it.price)}</div>`}
+      ${optionsHTML(it)}
       ${out?`<p style="margin-top:14px"><span class="badge-out">${T[lang].soldout}</span></p>`:""}
     </div>`;
   $("#sheet").classList.add("open"); $("#scrim").classList.add("open");
