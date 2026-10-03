@@ -12,7 +12,7 @@
   :root{
     --bg:#f7f1e8; --surface:#fffaf3; --ink:#2b1d14; --muted:#7a6656; --line:#e8dccb;
     --accent:#c8742c; --accent-ink:#fff; --chip:#efe4d4; --soldout:#a33b2b;
-    --hero1:#2b1d14; --hero2:#5a3420; --shadow:0 1px 2px rgba(43,29,20,.06),0 4px 14px rgba(43,29,20,.06);
+    --hero1:#2b1d14; --hero2:#5a3420; --shadow:0 1px 3px rgba(43,29,20,.07);
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -22,7 +22,6 @@
     }
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-padding-top:120px}
   body{background:var(--bg);color:var(--ink);font:15px/1.45 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
   button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .wrap{max-width:720px;margin:0 auto;padding:0 16px}
@@ -46,7 +45,7 @@
   .search input{width:100%;padding:11px 14px 11px 40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:16px;outline:none}
   .search input:focus{border-color:var(--accent)}
   .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
-  .cats{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
+  .cats{display:flex;gap:8px;overflow-x:auto;position:relative;padding:10px 0 12px;scrollbar-width:none}
   .cats::-webkit-scrollbar{display:none}
   .cats button{flex:none;padding:7px 14px;border-radius:999px;background:var(--chip);font-size:14px;font-weight:500;white-space:nowrap;transition:background .15s}
   .cats button.active{background:var(--ink);color:var(--bg)}
@@ -56,7 +55,7 @@
   section h2{font:700 21px Fraunces,Georgia,serif;margin-bottom:12px;display:flex;align-items:baseline;gap:8px}
   section h2 small{font:500 13px Inter,sans-serif;color:var(--muted)}
   .list{display:grid;gap:10px}
-  .item{display:flex;gap:13px;align-items:stretch;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;box-shadow:var(--shadow)}
+  .item{display:flex;gap:13px;align-items:stretch;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px;box-shadow:var(--shadow);contain:layout paint}
   .item:active{transform:scale(.995)}
   .thumb{width:96px;height:96px;flex:none;border-radius:12px;overflow:hidden;position:relative;background:var(--chip)}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block}
@@ -167,7 +166,7 @@ function priceHTML(it){
 }
 function imgHTML(it){
   return it.image
-    ? `<img src="${esc(it.image)}" alt="${esc(tx(it.name))}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:cupIcon}))">`
+    ? `<img src="${esc(it.image)}" alt="${esc(tx(it.name))}" loading="lazy" decoding="async" width="300" height="300" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:cupIcon}))">`
     : `<div class="ph">${cupIcon}</div>`;
 }
 function tagsHTML(it){
@@ -212,19 +211,44 @@ function render(){
   observe();
 }
 
-let io;
-function observe(){
-  io && io.disconnect();
-  io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting) setActive(e.target.dataset.cat); });
-  },{rootMargin:"-130px 0px -65% 0px"});
-  document.querySelectorAll("section[data-cat]").forEach(s=>io.observe(s));
+function observe(){ activeCat=null; pick(); }
+const barH=()=>$(".bar").offsetHeight;
+
+// Highlight the category whose section is under the sticky bar.
+// Runs at most once per animation frame and does no work if nothing changed.
+let activeCat=null, ticking=false, navLock=false, navTimer=0;
+function pick(){
+  if(navLock) return;                      // don't fight a tap-to-jump scroll
+  const secs=document.querySelectorAll("section[data-cat]"); if(!secs.length) return;
+  const line=barH()+20; let cur=secs[0];
+  if(innerHeight+scrollY >= document.documentElement.scrollHeight-4) cur=secs[secs.length-1];
+  else for(const sec of secs){ if(sec.getBoundingClientRect().top<=line) cur=sec; else break; }
+  setActive(cur.dataset.cat);
 }
+addEventListener("scroll",()=>{
+  if(ticking) return; ticking=true;
+  requestAnimationFrame(()=>{ ticking=false; pick(); });
+},{passive:true});
+addEventListener("scrollend",()=>{ if(navLock){ navLock=false; clearTimeout(navTimer); pick(); } });
+
 function setActive(id){
-  document.querySelectorAll("#cats button").forEach(b=>{
+  if(id===activeCat) return;
+  activeCat=id;
+  const bar=$("#cats");
+  bar.querySelectorAll("button").forEach(b=>{
     const on=b.dataset.cat===id; b.classList.toggle("active",on);
-    if(on) b.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
+    // Move the chip row instantly (no animation). An animated scroll here
+    // cancelled the page's own scrolling on phones -> lag and wrong jumps.
+    if(on) bar.scrollLeft=b.offsetLeft-(bar.clientWidth-b.offsetWidth)/2;
   });
+}
+function goToCat(id){
+  const sec=document.getElementById("cat-"+id); if(!sec) return;
+  setActive(id);
+  navLock=true; clearTimeout(navTimer);
+  navTimer=setTimeout(()=>{ navLock=false; pick(); },1200);   // fallback for browsers without "scrollend"
+  const top=sec.getBoundingClientRect().top+scrollY-barH()-8;
+  window.scrollTo({top:Math.max(0,top),behavior:"smooth"});
 }
 
 function openItem(id){
@@ -248,7 +272,7 @@ document.addEventListener("click",e=>{
   const l=e.target.closest(".lang button");
   if(l){ lang=l.dataset.lang; try{localStorage.setItem("bryton-lang",lang)}catch(_){}; render(); return; }
   const c=e.target.closest("#cats button");
-  if(c){ document.getElementById("cat-"+c.dataset.cat)?.scrollIntoView({behavior:"smooth"}); setActive(c.dataset.cat); return; }
+  if(c){ goToCat(c.dataset.cat); return; }
   const it=e.target.closest(".item");
   if(it){ openItem(it.dataset.id); return; }
   if(e.target.closest(".close") || e.target.id==="scrim") closeItem();
