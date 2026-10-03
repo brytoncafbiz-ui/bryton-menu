@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2b1d14">
+<title>Sold-out Switch · Bryton Café</title>
+<style>
+  :root{--bg:#f6f2ec;--card:#fff;--ink:#2b1d14;--muted:#7a6656;--line:#e4d8c8;--accent:#c8742c;--ok:#2f8a46;--out:#c0392b;--chg:#fff4e0}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,system-ui,-apple-system,sans-serif;padding-bottom:96px}
+  header{position:sticky;top:0;z-index:10;background:#2b1d14;color:#f7ead8;padding:10px 16px;display:flex;gap:8px;align-items:center}
+  header h1{font-size:16px;margin:0 auto 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .hbtn{flex:none;color:#f7ead8;border:1px solid rgba(255,255,255,.25);background:transparent;border-radius:9px;padding:7px 11px;font:inherit;font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer}
+  main{max-width:640px;margin:0 auto;padding:14px 16px}
+  .btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:11px 14px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.ghost{background:transparent}
+  .btn:disabled{opacity:.55;cursor:default}
+  .msg{display:none;padding:11px 13px;border-radius:10px;margin-bottom:12px;font-size:14px;border:1px solid}
+  .msg.show{display:block}
+  .msg.info{background:#fff8e8;border-color:#f0d9a8}
+  .msg.ok{background:#eaf6ec;border-color:#bfe0c5}
+  .msg.err{background:#fdecea;border-color:#f3c1bb}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+  .card h2{font-size:17px;margin:0 0 6px}
+  ol{padding-left:20px;margin:8px 0 14px} ol li{margin:5px 0}
+  code{background:#f3ece2;padding:1px 5px;border-radius:5px;font-size:13px}
+  input[type=text],input[type=password],input[type=search]{font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;width:100%;background:#fff;color:var(--ink)}
+  label.f{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:10px}
+  details summary{cursor:pointer;color:var(--muted);font-size:13px;margin:6px 0}
+  .g3{display:grid;grid-template-columns:1fr 1fr 90px;gap:8px}
+  .tools{display:flex;gap:8px;margin-bottom:10px;position:sticky;top:52px;z-index:5;background:var(--bg);padding:6px 0}
+  .tools input{flex:1}
+  .seg{display:flex;background:#ece3d6;border-radius:10px;padding:3px;flex:none}
+  .seg button{border:0;background:transparent;font:inherit;font-size:13.5px;font-weight:600;padding:7px 10px;border-radius:8px;cursor:pointer;color:var(--ink)}
+  .seg button.on{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  h3{font-size:13px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:16px 2px 6px}
+  .row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:7px;cursor:pointer;user-select:none}
+  .row.chg{background:var(--chg);border-color:#efc98f}
+  .th{width:44px;height:44px;border-radius:9px;object-fit:cover;background:#efe4d4;flex:none}
+  .nm{flex:1;min-width:0}
+  .nm b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .st{font-size:12.5px;font-weight:600}
+  .st.on{color:var(--ok)} .st.off{color:var(--out)}
+  .st i{font-style:normal;color:#b5730e;font-weight:600}
+  .row.off .th{filter:grayscale(1);opacity:.6}
+  .row.off .nm b{color:var(--muted)}
+  .hid{font-size:11px;font-weight:700;color:var(--muted);border:1px solid currentColor;border-radius:5px;padding:0 5px;margin-left:6px}
+  /* switch */
+  .sw{appearance:none;-webkit-appearance:none;width:54px;height:32px;border-radius:999px;background:#d9cbbb;position:relative;flex:none;cursor:pointer;transition:background .15s;margin:0}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .15s}
+  .sw:checked{background:var(--ok)}
+  .sw:checked::after{transform:translateX(22px)}
+  .sw:not(:checked){background:var(--out)}
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#2b1d14;color:#f7ead8;padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;justify-content:center}
+  .bar[hidden]{display:none}
+  .bar span{margin-right:auto;font-weight:600;max-width:640px}
+  .bar .btn.ghost{color:#f7ead8;border-color:rgba(255,255,255,.3)}
+  .empty{text-align:center;color:var(--muted);padding:36px 0}
+  .foot{display:flex;justify-content:center;margin-top:16px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Sold-out switch</h1>
+  <a class="hbtn" href="./">Menu</a>
+  <a class="hbtn" href="editor.html">Editor</a>
+  <button class="hbtn" id="keyBtn">Key</button>
+</header>
+
+<main>
+  <div class="msg" id="msg"></div>
+
+  <!-- One-time setup -->
+  <section id="setup" hidden>
+    <div class="card">
+      <h2>One-time setup on this device</h2>
+      <p style="margin:0 0 6px;color:var(--muted);font-size:14px">This page saves sold-out changes straight to your GitHub menu. It needs an access key that can only change this one menu.</p>
+      <ol>
+        <li>On this device, open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener"><b>GitHub → New fine-grained token</b></a> (sign in as <b id="ownerName">brytoncafbiz-ui</b>).</li>
+        <li><b>Token name:</b> <code>Bryton sold-out switch</code></li>
+        <li><b>Expiration:</b> choose the longest option offered (e.g. 1 year). Note the date; you'll repeat these steps after it expires.</li>
+        <li><b>Repository access:</b> <i>Only select repositories</i> → pick <b id="repoName">bryton-menu</b>.</li>
+        <li><b>Permissions → Repository permissions → Contents:</b> set to <b>Read and write</b>. Leave everything else as is.</li>
+        <li>Tap <b>Generate token</b>, then <b>copy</b> it (starts with <code>github_pat_</code>). GitHub shows it only once.</li>
+        <li>Paste it below and tap <b>Save key</b>.</li>
+      </ol>
+      <label class="f">Access key<input type="password" id="tokenIn" autocomplete="off" placeholder="github_pat_…"></label>
+      <details><summary>Advanced (only if your repository name is different)</summary>
+        <div class="g3">
+          <label class="f">Owner<input type="text" id="ownerIn"></label>
+          <label class="f">Repository<input type="text" id="repoIn"></label>
+          <label class="f">Branch<input type="text" id="branchIn"></label>
+        </div>
+      </details>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <button class="btn primary" id="saveKey">Save key</button>
+        <button class="btn ghost" id="cancelKey" hidden>Cancel</button>
+        <button class="btn ghost" id="forgetKey" hidden style="color:var(--out)">Remove key from this device</button>
+      </div>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">The key is stored only in this browser on this device. Don't share it. If a device is lost, delete the token on GitHub (Settings → Developer settings → Personal access tokens).</p>
+    </div>
+  </section>
+
+  <!-- Switch list -->
+  <section id="stock" hidden>
+    <div class="tools">
+      <input type="search" id="q" placeholder="Search item…" autocomplete="off">
+      <div class="seg"><button data-f="all" class="on">All</button><button data-f="out">Sold out <span id="outN"></span></button></div>
+    </div>
+    <div id="list"><div class="empty">Loading menu…</div></div>
+    <div class="foot"><button class="btn ghost" id="allOn">Make everything available</button></div>
+  </section>
+</main>
+
+<div class="bar" id="bar" hidden>
+  <span id="chg"></span>
+  <button class="btn ghost" id="undo">Undo</button>
+  <button class="btn primary" id="pub">Publish</button>
+</div>
+
+<script>
+/* ---------- settings ---------- */
+const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}};
+const guess=(()=>{
+  const h=location.hostname, seg=location.pathname.split("/").filter(Boolean), gh=h.endsWith(".github.io");
+  return { owner: gh?h.split(".")[0]:"brytoncafbiz-ui", repo: gh?(seg.length&&!/\.html$/.test(seg[0])?seg[0]:h):"bryton-menu" };
+})();
+const cfg={
+  owner: store.get("bm-owner")||guess.owner,
+  repo:  store.get("bm-repo")||guess.repo,
+  branch:store.get("bm-branch")||"main",
+  token: store.get("bm-token")||""
+};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nameOf=it=>(it.name&&(it.name.id||it.name.en))||it.id;
+
+function msg(text,type="info"){ const m=$("#msg"); m.textContent=text; m.className="msg show "+type; if(!text) m.className="msg"; }
+
+/* ---------- GitHub API ---------- */
+async function gh(path,opt={}){
+  let r;
+  try{
+    r=await fetch(`https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}${path}`,{
+      ...opt, cache:"no-store",
+      headers:{Authorization:`Bearer ${cfg.token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opt.body?{"Content-Type":"application/json"}:{})}
+    });
+  }catch(e){ const er=new Error("offline"); er.status=0; throw er; }
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok){ const er=new Error(data.message||("HTTP "+r.status)); er.status=r.status; throw er; }
+  return data;
+}
+function explain(e){
+  if(e.status===0)   return "No internet connection. Check Wi-Fi/data and try again.";
+  if(e.status===401) return "The access key is wrong or has expired. Tap “Key” and paste a new one.";
+  if(e.status===403) return "The key can't save changes. On GitHub, edit the token and set Contents to “Read and write”.";
+  if(e.status===404) return `Can't find ${cfg.owner}/${cfg.repo} with this key. Check the token's repository access (it must include ${cfg.repo}).`;
+  return "Something went wrong: "+e.message;
+}
+const b64dec=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
+const b64enc=s=>{ const by=new TextEncoder().encode(s); let bin=""; for(let i=0;i<by.length;i+=0x8000) bin+=String.fromCharCode.apply(null,by.subarray(i,i+0x8000)); return btoa(bin); };
+async function readMenu(){
+  const f=await gh(`/contents/menu.json?ref=${encodeURIComponent(cfg.branch)}&t=${Date.now()}`);
+  return {menu:JSON.parse(b64dec(f.content)), sha:f.sha};
+}
+
+/* ---------- state ---------- */
+let MENU=null, pending=new Map(), filter="all", query="", busy=false;
+const isOn=it=>pending.has(it.id)?pending.get(it.id):it.available!==false;
+
+function showSetup(isChange){
+  $("#setup").hidden=false; $("#stock").hidden=true; $("#bar").hidden=true;
+  $("#ownerName").textContent=cfg.owner; $("#repoName").textContent=cfg.repo;
+  $("#ownerIn").value=cfg.owner; $("#repoIn").value=cfg.repo; $("#branchIn").value=cfg.branch;
+  $("#tokenIn").value=""; $("#tokenIn").placeholder=cfg.token?`Saved key …${cfg.token.slice(-4)} (paste a new one to replace)`:"github_pat_…";
+  $("#cancelKey").hidden=!isChange; $("#forgetKey").hidden=!cfg.token;
+}
+async function load(){
+  if(!cfg.token){ showSetup(false); msg("Set up this device once to start switching items on and off."); return; }
+  $("#setup").hidden=true; $("#stock").hidden=false;
+  try{
+    const {menu}=await readMenu(); MENU=menu; pending.clear(); render(); msg("");
+  }catch(e){ msg(explain(e),"err"); if([401,403,404].includes(e.status)) showSetup(true); }
+}
+
+/* ---------- render ---------- */
+function render(){
+  if(!MENU) return;
+  const q=query.trim().toLowerCase();
+  const items=(MENU.items||[]).filter(it=>{
+    if(filter==="out" && isOn(it)) return false;
+    if(q && ![it.name?.id,it.name?.en].join(" ").toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const outCount=(MENU.items||[]).filter(it=>!isOn(it)).length;
+  $("#outN").textContent=outCount?`(${outCount})`:"";
+  const cats=[...(MENU.categories||[]),{id:null,name:{id:"Other",en:"Other"}}];
+  let html="";
+  cats.forEach(c=>{
+    const list=items.filter(it=>c.id===null?!(MENU.categories||[]).some(x=>x.id===it.category):it.category===c.id);
+    if(!list.length) return;
+    html+=`<h3>${esc(c.name.id||c.name.en)}</h3>`+list.map(it=>{
+      const on=isOn(it), chg=pending.has(it.id);
+      return `<label class="row ${on?"":"off"} ${chg?"chg":""}">
+        ${it.image?`<img class="th" src="${esc(it.image)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=th></div>'">`:`<div class="th"></div>`}
+        <div class="nm"><b>${esc(nameOf(it))}${it.hidden?`<span class="hid">HIDDEN</span>`:""}</b>
+          <span class="st ${on?"on":"off"}">${on?"Available":"Sold out"}${chg?` <i>· not published</i>`:""}</span></div>
+        <input type="checkbox" class="sw" data-id="${esc(it.id)}" ${on?"checked":""} aria-label="${esc(nameOf(it))} available">
+      </label>`;}).join("");
+  });
+  $("#list").innerHTML=html||`<div class="empty">${filter==="out"?"Nothing is sold out right now.":"No items found."}</div>`;
+  const n=pending.size;
+  $("#bar").hidden=!n;
+  $("#chg").textContent=`${n} change${n>1?"s":""} not published`;
+}
+
+/* ---------- actions ---------- */
+function setItem(id,on){
+  const it=MENU.items.find(x=>x.id===id); if(!it) return;
+  if((it.available!==false)===on) pending.delete(id); else pending.set(id,on);
+}
+$("#list").addEventListener("change",e=>{
+  const t=e.target; if(!t.classList.contains("sw")) return;
+  setItem(t.dataset.id,t.checked); render();
+});
+$("#q").addEventListener("input",e=>{ query=e.target.value; render(); });
+document.querySelector(".seg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return; filter=b.dataset.f;
+  document.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x===b)); render();
+});
+$("#allOn").onclick=()=>{ if(!MENU) return; MENU.items.forEach(it=>{ if(!isOn(it)) setItem(it.id,true); }); render(); };
+$("#undo").onclick=()=>{ pending.clear(); render(); };
+
+$("#pub").onclick=async()=>{
+  if(busy||!pending.size) return;
+  busy=true; const btn=$("#pub"); btn.disabled=true; btn.textContent="Publishing…";
+  const wanted=new Map(pending);
+  try{
+    for(let attempt=0;;attempt++){
+      try{
+        // Always start from the latest menu on GitHub, so edits made elsewhere are kept.
+        const {menu,sha}=await readMenu(); const notes=[];
+        (menu.items||[]).forEach(it=>{
+          if(!wanted.has(it.id)) return; const on=wanted.get(it.id);
+          if((it.available!==false)!==on){ it.available=on; notes.push(`${nameOf(it)} ${on?"available":"sold out"}`); }
+        });
+        if(notes.length){
+          const message="Stock: "+notes.slice(0,4).join(", ")+(notes.length>4?` +${notes.length-4} more`:"");
+          await gh(`/contents/menu.json`,{method:"PUT",body:JSON.stringify({message,content:b64enc(JSON.stringify(menu,null,2)+"\n"),sha,branch:cfg.branch})});
+        }
+        MENU=menu; pending.clear(); render();
+        msg("Published ✓  Updating the customer menu… (about 1 minute)","ok");
+        watchLive(wanted);
+        break;
+      }catch(e){
+        if((e.status===409||e.status===422) && attempt<2) continue;   // menu changed at the same moment; retry with the newest copy
+        throw e;
+      }
+    }
+  }catch(e){ msg(explain(e)+" Your switches are kept; tap Publish to try again.","err"); }
+  busy=false; btn.disabled=false; btn.textContent="Publish";
+};
+
+// Check the public menu until the change is visible to customers.
+async function watchLive(wanted){
+  const base=location.hostname.endsWith(".github.io")?"":`https://${cfg.owner}.github.io/${cfg.repo}/`;
+  const t0=Date.now();
+  while(Date.now()-t0<180000){
+    await new Promise(r=>setTimeout(r,8000));
+    try{
+      const live=await (await fetch(`${base}menu.json?v=${Date.now()}`,{cache:"no-store"})).json();
+      const ok=[...wanted].every(([id,on])=>{ const it=(live.items||[]).find(x=>x.id===id); return !it||(it.available!==false)===on; });
+      if(ok){ msg("Live on the customer menu ✓","ok"); return; }
+    }catch(e){}
+    if(pending.size) return;   // user started new changes; stop watching
+  }
+  msg("Saved on GitHub ✓  It can take a few minutes to show on customers' phones.","ok");
+}
+
+/* ---------- key setup ---------- */
+$("#keyBtn").onclick=()=>showSetup(true);
+$("#cancelKey").onclick=()=>{ if(cfg.token) load(); };
+$("#forgetKey").onclick=()=>{ if(!confirm("Remove the access key from this device?")) return; store.set("bm-token",null); cfg.token=""; showSetup(false); msg("Key removed from this device."); };
+$("#saveKey").onclick=async()=>{
+  const tok=$("#tokenIn").value.trim();
+  const owner=$("#ownerIn").value.trim()||cfg.owner, repo=$("#repoIn").value.trim()||cfg.repo, branch=$("#branchIn").value.trim()||"main";
+  const prev={...cfg};
+  Object.assign(cfg,{owner,repo,branch}); if(tok) cfg.token=tok;
+  if(!cfg.token){ msg("Paste the access key first.","err"); return; }
+  const b=$("#saveKey"); b.disabled=true; b.textContent="Checking…";
+  try{
+    await readMenu();
+    store.set("bm-token",cfg.token); store.set("bm-owner",owner); store.set("bm-repo",repo); store.set("bm-branch",branch);
+    msg("Key saved on this device ✓","ok"); await load(); msg("Key saved on this device ✓","ok");
+  }catch(e){ Object.assign(cfg,prev); msg(explain(e),"err"); }
+  b.disabled=false; b.textContent="Save key";
+};
+
+addEventListener("beforeunload",e=>{ if(pending.size){ e.preventDefault(); e.returnValue=""; } });
+load();
+</script>
+</body>
+</html>
