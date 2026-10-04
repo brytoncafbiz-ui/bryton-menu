@@ -631,21 +631,21 @@
             "id": "Xtra telur ceplok",
             "en": "Xtra telur ceplok"
           },
-          "extra": 6000
+          "extra": 3000
         },
         {
           "name": {
             "id": "Xtra telur dadar",
             "en": "Xtra telur dadar"
           },
-          "extra": 6000
+          "extra": 3000
         },
         {
           "name": {
             "id": "Xtra telur ceplok 1/2 matang",
             "en": "Xtra telur ceplok 1/2 matang"
           },
-          "extra": 6000
+          "extra": 3000
         },
         {
           "name": {
@@ -666,14 +666,14 @@
             "id": "Pedas",
             "en": "Pedas"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "extra": 4000
+          "extra": 2000
         }
       ]
     },
@@ -727,6 +727,13 @@
             "en": "Xtra rawit iris"
           },
           "extra": 2000
+        },
+        {
+          "name": {
+            "id": "Telur Ceplok",
+            "en": "Telur Ceplok"
+          },
+          "extra": 3000
         }
       ]
     },
@@ -765,14 +772,14 @@
             "id": "Pedas",
             "en": "Pedas"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "extra": 4000
+          "extra": 2000
         }
       ]
     },
@@ -787,7 +794,7 @@
         "id": "",
         "en": ""
       },
-      "price": 22000,
+      "price": 23000,
       "image": "",
       "tags": [],
       "available": true,
@@ -811,14 +818,14 @@
             "id": "Pedas",
             "en": "Pedas"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "extra": 4000
+          "extra": 2000
         }
       ]
     },
@@ -857,14 +864,14 @@
             "id": "Pedas",
             "en": "Pedas"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "extra": 4000
+          "extra": 2000
         }
       ]
     },
@@ -912,14 +919,14 @@
             "id": "Pedas",
             "en": "Pedas"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "extra": 4000
+          "extra": 2000
         }
       ]
     },
