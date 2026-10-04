@@ -155,7 +155,7 @@
           "extra": 5000
         }
       ],
-      "image": "",
+      "image": "images/cafe-latte-mutawf0t.jpg",
       "tags": [],
       "available": true
     },
@@ -219,7 +219,7 @@
         "en": ""
       },
       "price": 28000,
-      "image": "",
+      "image": "images/kopsus-aren-mutb4u5s.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -1082,7 +1082,7 @@
         "en": ""
       },
       "price": 18000,
-      "image": "",
+      "image": "images/tempe-mendoan-mutb0w4s.jpg",
       "tags": [],
       "available": true
     }
