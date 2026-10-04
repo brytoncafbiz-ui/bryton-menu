@@ -109,7 +109,7 @@
           "extra": 2000
         }
       ],
-      "image": "",
+      "image": "images/espresso-mutaavno.jpg",
       "tags": [],
       "available": true
     },
@@ -368,7 +368,7 @@
         "en": ""
       },
       "price": 28000,
-      "image": "images/chocolate-mut3pr75.jpg",
+      "image": "images/chocolate-mutaalr2.jpg",
       "tags": [
         "new"
       ],
@@ -409,7 +409,7 @@
         "en": ""
       },
       "price": 22000,
-      "image": "images/teh-tarik-mut3sy2g.jpg",
+      "image": "images/teh-tarik-mutaddrq.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -473,7 +473,7 @@
         "en": ""
       },
       "price": 20000,
-      "image": "images/blackcurrant-tea-mut3p2pl.jpg",
+      "image": "images/blackcurrant-tea-mutaa8vu.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -505,7 +505,7 @@
         "en": ""
       },
       "price": 12000,
-      "image": "images/tea-mut3sq75.jpg",
+      "image": "images/tea-muta8wbc.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -544,7 +544,7 @@
         "en": ""
       },
       "price": 23000,
-      "image": "images/ice-lychee-tea-mut3qgdh.jpg",
+      "image": "images/ice-lychee-tea-muta969p.jpg",
       "tags": [],
       "available": true
     },
@@ -560,7 +560,7 @@
         "en": ""
       },
       "price": 32000,
-      "image": "images/ice-sea-salt-cream-latte-mut9ford.jpg",
+      "image": "images/ice-sea-salt-cream-latte-muta9gnp.jpg",
       "tags": [],
       "available": true
     },
@@ -689,7 +689,7 @@
         "en": ""
       },
       "price": 28000,
-      "image": "images/nasi-goreng-sosis-mut3rfj1.jpg",
+      "image": "images/nasi-goreng-sosis-mutac0di.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -841,7 +841,7 @@
         "en": ""
       },
       "price": 25000,
-      "image": "images/mie-goreng-sosis-mut3r0hf.jpg",
+      "image": "images/mie-goreng-sosis-mutabnm6.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -1066,7 +1066,7 @@
         "en": ""
       },
       "price": 18000,
-      "image": "images/tahu-cabe-garam-mut3scl0.jpg",
+      "image": "images/tahu-cabe-garam-mutacvcs.jpg",
       "tags": [],
       "available": true
     },
