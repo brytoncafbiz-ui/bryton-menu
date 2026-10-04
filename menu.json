@@ -53,7 +53,7 @@
         "id": "",
         "en": ""
       },
-      "price": 23000,
+      "price": 25000,
       "image": "images/americano-mup38g26.jpg",
       "tags": [],
       "available": true,
@@ -70,7 +70,14 @@
             "id": "Dingin",
             "en": "Iced"
           },
-          "extra": 2000
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Arabica",
+            "en": "Arabica"
+          },
+          "extra": 5000
         }
       ]
     },
@@ -89,10 +96,17 @@
       "variants": [
         {
           "name": {
-            "id": "Panas",
-            "en": "Hot"
+            "id": "Single shot",
+            "en": "Single shot"
           },
           "extra": 0
+        },
+        {
+          "name": {
+            "id": "Double shot",
+            "en": "Double shot"
+          },
+          "extra": 2000
         }
       ],
       "image": "",
@@ -110,7 +124,7 @@
         "id": "",
         "en": ""
       },
-      "price": 2000,
+      "price": 25000,
       "variants": [
         {
           "name": {
@@ -124,7 +138,21 @@
             "id": "Dingin",
             "en": "Iced"
           },
-          "extra": 2000
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra Sugar",
+            "en": "Xtra Sugar"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Arabica",
+            "en": "Arabica"
+          },
+          "extra": 5000
         }
       ],
       "image": "",
@@ -165,8 +193,8 @@
         },
         {
           "name": {
-            "id": "Full Arabica",
-            "en": "Full Arabica"
+            "id": "Arabica",
+            "en": "Arabica"
           },
           "extra": 5000
         },
@@ -175,7 +203,7 @@
             "id": "Xtra Sugar",
             "en": "Xtra Sugar"
           },
-          "extra": 3000
+          "extra": 0
         }
       ]
     },
@@ -207,14 +235,14 @@
             "id": "Dingin",
             "en": "Iced"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra manis",
             "en": "Xtra sweet"
           },
-          "extra": 3000
+          "extra": 0
         },
         {
           "name": {
@@ -246,14 +274,7 @@
             "id": "Xtra gula",
             "en": "Xtra Sugar"
           },
-          "extra": 3000
-        },
-        {
-          "name": {
-            "id": "Xtra cream",
-            "en": "Xtra cream"
-          },
-          "extra": 5000
+          "extra": 0
         }
       ]
     },
@@ -285,14 +306,14 @@
             "id": "Dingin",
             "en": "Ice"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra gula",
             "en": "Xtra Sugar"
           },
-          "extra": 3000
+          "extra": 0
         },
         {
           "name": {
@@ -324,7 +345,7 @@
             "id": "Xtra gula",
             "en": "Xtra Sugar"
           },
-          "extra": 3000
+          "extra": 0
         },
         {
           "name": {
@@ -347,7 +368,7 @@
         "en": ""
       },
       "price": 28000,
-      "image": "",
+      "image": "images/chocolate-mut3pr75.jpg",
       "tags": [
         "new"
       ],
@@ -365,21 +386,14 @@
             "id": "Dingin",
             "en": "Ice"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra gula",
             "en": "Xtra sugar"
           },
-          "extra": 3000
-        },
-        {
-          "name": {
-            "id": "Xtra cream",
-            "en": "Xtra xrean"
-          },
-          "extra": 5000
+          "extra": 0
         }
       ]
     },
@@ -395,7 +409,7 @@
         "en": ""
       },
       "price": 22000,
-      "image": "",
+      "image": "images/teh-tarik-mut3sy2g.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -411,7 +425,7 @@
             "id": "Dingin",
             "en": "Ice"
           },
-          "extra": 2000
+          "extra": 0
         }
       ]
     },
@@ -443,7 +457,7 @@
             "id": "Dingin",
             "en": "Ice"
           },
-          "extra": 2000
+          "extra": 0
         }
       ]
     },
@@ -459,7 +473,7 @@
         "en": ""
       },
       "price": 20000,
-      "image": "",
+      "image": "images/blackcurrant-tea-mut3p2pl.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -475,7 +489,7 @@
             "id": "Dingin",
             "en": "Ice"
           },
-          "extra": 2000
+          "extra": 0
         }
       ]
     },
@@ -483,15 +497,15 @@
       "id": "item-muqd90ud",
       "category": "non-coffee",
       "name": {
-        "id": "Teh Kosong",
+        "id": "Teh",
         "en": "Tea"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 10000,
-      "image": "",
+      "price": 12000,
+      "image": "images/tea-mut3sq75.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -514,7 +528,7 @@
             "id": "Manis",
             "en": "Sugar"
           },
-          "extra": 500
+          "extra": 0
         }
       ]
     },
@@ -522,33 +536,17 @@
       "id": "item-muqdcyfm",
       "category": "non-coffee",
       "name": {
-        "id": "Lychee Tea",
-        "en": "Lychee Tea"
+        "id": "Ice Lychee Tea",
+        "en": "Ice Lychee Tea"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 20000,
-      "image": "",
+      "price": 23000,
+      "image": "images/ice-lychee-tea-mut3qgdh.jpg",
       "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Ice"
-          },
-          "extra": 2000
-        }
-      ]
+      "available": true
     },
     {
       "id": "item-muqdhir7",
@@ -562,7 +560,7 @@
         "en": ""
       },
       "price": 32000,
-      "image": "",
+      "image": "images/ice-sea-salt-cream-latte-mut3rwwk.jpg",
       "tags": [],
       "available": true
     },
@@ -601,14 +599,14 @@
             "id": "Pedas",
             "en": "Pedas"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "extra": 4000
+          "extra": 2000
         }
       ]
     },
@@ -691,30 +689,16 @@
         "en": ""
       },
       "price": 28000,
-      "image": "",
+      "image": "images/nasi-goreng-sosis-mut3rfj1.jpg",
       "tags": [],
       "available": true,
       "variants": [
         {
           "name": {
-            "id": "Telur Ceplok",
-            "en": "Telur Ceplok"
-          },
-          "extra": 6000
-        },
-        {
-          "name": {
             "id": "Telur Dadar",
             "en": "Telur Dadar"
           },
-          "extra": 6000
-        },
-        {
-          "name": {
-            "id": "Telur Ceplok 1/2 matang",
-            "en": "Telur Ceplok 1/2 matang"
-          },
-          "extra": 6000
+          "extra": 3000
         },
         {
           "name": {
@@ -735,14 +719,14 @@
             "id": "Pedas",
             "en": "Pedas"
           },
-          "extra": 2000
+          "extra": 0
         },
         {
           "name": {
             "id": "Xtra rawit iris",
             "en": "Xtra rawit iris"
           },
-          "extra": 4000
+          "extra": 2000
         }
       ]
     },
@@ -850,7 +834,7 @@
         "en": ""
       },
       "price": 25000,
-      "image": "",
+      "image": "images/mie-goreng-sosis-mut3r0hf.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -999,7 +983,7 @@
             "id": "Porsi Double",
             "en": "Porsi Double"
           },
-          "extra": 6000
+          "extra": 5000
         },
         {
           "name": {
@@ -1021,6 +1005,13 @@
             "en": "Varian Soto"
           },
           "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra rawit iris",
+            "en": "Xtra rawit iris"
+          },
+          "extra": 2000
         }
       ]
     },
@@ -1068,7 +1059,7 @@
         "en": ""
       },
       "price": 18000,
-      "image": "",
+      "image": "images/tahu-cabe-garam-mut3scl0.jpg",
       "tags": [],
       "available": true
     },
