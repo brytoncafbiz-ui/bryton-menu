@@ -39,219 +39,31 @@
         "id": "Camilan",
         "en": "Snacks"
       }
+    },
+    {
+      "id": "tambahan-topping",
+      "name": {
+        "id": "Tambahan Topping",
+        "en": "Additional Topping"
+      }
     }
   ],
   "items": [
     {
-      "id": "es-kopi-susu-bryton",
+      "id": "item-muqdhir7",
       "category": "coffee",
       "name": {
-        "id": "Americano",
-        "en": "Americano"
+        "id": "Ice Sea Salt Cream Latte",
+        "en": "Ice Sea Salt Cream Latte"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 25000,
-      "image": "images/americano-mup38g26.jpg",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Iced"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Arabica",
-            "en": "Arabica"
-          },
-          "extra": 5000
-        }
-      ]
-    },
-    {
-      "id": "cappuccino",
-      "category": "coffee",
-      "name": {
-        "id": "Espresso",
-        "en": "Espresso"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 18000,
-      "variants": [
-        {
-          "name": {
-            "id": "Single shot",
-            "en": "Single shot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Double shot",
-            "en": "Double shot"
-          },
-          "extra": 2000
-        }
-      ],
-      "image": "images/espresso-mutaavno.jpg",
+      "price": 32000,
+      "image": "images/ice-sea-salt-cream-latte-muta9gnp.jpg",
       "tags": [],
       "available": true
-    },
-    {
-      "id": "americano",
-      "category": "coffee",
-      "name": {
-        "id": "Cafe Latte",
-        "en": "Cafe Latte"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 25000,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Iced"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra Sugar",
-            "en": "Xtra Sugar"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Arabica",
-            "en": "Arabica"
-          },
-          "extra": 5000
-        }
-      ],
-      "image": "images/cafe-latte-mutawf0t.jpg",
-      "tags": [],
-      "available": true
-    },
-    {
-      "id": "matcha-latte",
-      "category": "coffee",
-      "name": {
-        "id": "Cappucinno",
-        "en": "Cappucinno"
-      },
-      "description": {
-        "id": "Matcha Jepang dengan susu segar.",
-        "en": "Japanese matcha with fresh milk."
-      },
-      "price": 25000,
-      "image": "images/cappucinno-muqihvxm.jpg",
-      "tags": [
-        "new"
-      ],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Iced"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Arabica",
-            "en": "Arabica"
-          },
-          "extra": 5000
-        },
-        {
-          "name": {
-            "id": "Xtra Sugar",
-            "en": "Xtra Sugar"
-          },
-          "extra": 0
-        }
-      ]
-    },
-    {
-      "id": "chocolate",
-      "category": "coffee",
-      "name": {
-        "id": "Kopsus Aren",
-        "en": "Kopsus Aren"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 28000,
-      "image": "images/kopsus-aren-mutb4u5s.jpg",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Iced"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra manis",
-            "en": "Xtra sweet"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Beans Arabica",
-            "en": "Beans Arabica"
-          },
-          "extra": 5000
-        }
-      ]
     },
     {
       "id": "nasi-goreng-bryton",
@@ -328,7 +140,7 @@
       "id": "french-fries",
       "category": "coffee",
       "name": {
-        "id": "Kopi Soda Hitam",
+        "id": "Black Coffee Soda",
         "en": "Black Coffee Soda"
       },
       "description": {
@@ -355,6 +167,217 @@
           "extra": 5000
         }
       ]
+    },
+    {
+      "id": "chocolate",
+      "category": "coffee",
+      "name": {
+        "id": "Kopsus Aren",
+        "en": "Kopsus Aren"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 28000,
+      "image": "images/kopsus-aren-mutb4u5s.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Iced"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra manis",
+            "en": "Xtra sweet"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Beans Arabica",
+            "en": "Beans Arabica"
+          },
+          "extra": 5000
+        }
+      ]
+    },
+    {
+      "id": "matcha-latte",
+      "category": "coffee",
+      "name": {
+        "id": "Cappucinno",
+        "en": "Cappucinno"
+      },
+      "description": {
+        "id": "Matcha Jepang dengan susu segar.",
+        "en": "Japanese matcha with fresh milk."
+      },
+      "price": 25000,
+      "image": "images/cappucinno-muqihvxm.jpg",
+      "tags": [
+        "new"
+      ],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Iced"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Arabica",
+            "en": "Arabica"
+          },
+          "extra": 5000
+        },
+        {
+          "name": {
+            "id": "Xtra Sugar",
+            "en": "Xtra Sugar"
+          },
+          "extra": 0
+        }
+      ]
+    },
+    {
+      "id": "americano",
+      "category": "coffee",
+      "name": {
+        "id": "Cafe Latte",
+        "en": "Cafe Latte"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 25000,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Iced"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra Sugar",
+            "en": "Xtra Sugar"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Arabica",
+            "en": "Arabica"
+          },
+          "extra": 5000
+        }
+      ],
+      "image": "images/cafe-latte-mutawf0t.jpg",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "es-kopi-susu-bryton",
+      "category": "coffee",
+      "name": {
+        "id": "Americano",
+        "en": "Americano"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 25000,
+      "image": "images/americano-mup38g26.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Iced"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Arabica",
+            "en": "Arabica"
+          },
+          "extra": 5000
+        }
+      ]
+    },
+    {
+      "id": "cappuccino",
+      "category": "coffee",
+      "name": {
+        "id": "Espresso",
+        "en": "Espresso"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 18000,
+      "variants": [
+        {
+          "name": {
+            "id": "Single shot",
+            "en": "Single shot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Double shot",
+            "en": "Double shot"
+          },
+          "extra": 2000
+        }
+      ],
+      "image": "images/espresso-mutaavno.jpg",
+      "tags": [],
+      "available": true
     },
     {
       "id": "croissant",
@@ -396,6 +419,22 @@
           "extra": 0
         }
       ]
+    },
+    {
+      "id": "item-muqdcyfm",
+      "category": "non-coffee",
+      "name": {
+        "id": "Ice Lychee Tea",
+        "en": "Ice Lychee Tea"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 23000,
+      "image": "images/ice-lychee-tea-muta969p.jpg",
+      "tags": [],
+      "available": true
     },
     {
       "id": "item-muqd2ygt",
@@ -533,82 +572,20 @@
       ]
     },
     {
-      "id": "item-muqdcyfm",
-      "category": "non-coffee",
-      "name": {
-        "id": "Ice Lychee Tea",
-        "en": "Ice Lychee Tea"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 23000,
-      "image": "images/ice-lychee-tea-muta969p.jpg",
-      "tags": [],
-      "available": true
-    },
-    {
-      "id": "item-muqdhir7",
-      "category": "coffee",
-      "name": {
-        "id": "Ice Sea Salt Cream Latte",
-        "en": "Ice Sea Salt Cream Latte"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 32000,
-      "image": "images/ice-sea-salt-cream-latte-muta9gnp.jpg",
-      "tags": [],
-      "available": true
-    },
-    {
-      "id": "item-muqdjo94",
+      "id": "item-muqf2qvc",
       "category": "food",
       "name": {
-        "id": "Nasi Goreng Tek-tek",
-        "en": "Nasi Goreng Tek-tek"
+        "id": "Chiisai Beef Teriyaki Rice",
+        "en": "Chiisai Beef Teriyaki Rice"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 25000,
-      "image": "images/nasi-goreng-tek-tek-muqijksl.jpg",
+      "price": 40000,
+      "image": "",
       "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Tidak Pedas",
-            "en": "Tidak Pedas"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas Sedang",
-            "en": "Pedas Sedang"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas",
-            "en": "Pedas"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra rawit iris",
-            "en": "Xtra rawit iris"
-          },
-          "extra": 2000
-        }
-      ]
+      "available": true
     },
     {
       "id": "item-muqdrl4o",
@@ -623,52 +600,6 @@
       },
       "price": 35000,
       "image": "",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Tidak Pedas",
-            "en": "Tidak Pedas"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas Sedang",
-            "en": "Pedas Sedang"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas",
-            "en": "Pedas"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra rawit iris",
-            "en": "Xtra rawit iris"
-          },
-          "extra": 2000
-        }
-      ]
-    },
-    {
-      "id": "item-muqe0nnl",
-      "category": "food",
-      "name": {
-        "id": "Nasi Goreng Sosis",
-        "en": "Nasi Goreng Sosis"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 28000,
-      "image": "images/nasi-goreng-sosis-mutac0di.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -749,18 +680,126 @@
       ]
     },
     {
-      "id": "item-muqefv2z",
+      "id": "item-muqezcsm",
       "category": "food",
       "name": {
-        "id": "Mie Goreng Tek-tek",
-        "en": "Mie Goreng Tek-tek"
+        "id": "Chiisai Honey Garlic Chicken Rice",
+        "en": "Chiisai Honey Garlic Chicken Rice"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 23000,
+      "price": 35000,
       "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "item-muxz4up4",
+      "category": "food",
+      "name": {
+        "id": "Nasi Goreng Kecombrang",
+        "en": "Nasi Goreng Kecombrang"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 30000,
+      "image": "",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Tidak Pedas",
+            "en": "Non Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas Sedang",
+            "en": "Medium Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas",
+            "en": "Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Rawit Iris",
+            "en": "Xtra Sliced Chili"
+          },
+          "extra": 2000
+        }
+      ]
+    },
+    {
+      "id": "item-muqe0nnl",
+      "category": "food",
+      "name": {
+        "id": "Nasi Goreng Sosis",
+        "en": "Nasi Goreng Sosis"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 28000,
+      "image": "images/nasi-goreng-sosis-mutac0di.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Tidak Pedas",
+            "en": "Tidak Pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas Sedang",
+            "en": "Pedas Sedang"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas",
+            "en": "Pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra rawit iris",
+            "en": "Xtra rawit iris"
+          },
+          "extra": 2000
+        }
+      ]
+    },
+    {
+      "id": "item-muqdjo94",
+      "category": "food",
+      "name": {
+        "id": "Nasi Goreng Tek-tek",
+        "en": "Nasi Goreng Tek-tek"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 25000,
+      "image": "images/nasi-goreng-tek-tek-muqijksl.jpg",
       "tags": [],
       "available": true,
       "variants": [
@@ -841,22 +880,6 @@
       ]
     },
     {
-      "id": "item-muqesa5a",
-      "category": "snack",
-      "name": {
-        "id": "French Fries",
-        "en": "French Fries"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 15000,
-      "image": "",
-      "tags": [],
-      "available": true
-    },
-    {
       "id": "item-muqet4bz",
       "category": "food",
       "name": {
@@ -896,33 +919,95 @@
       ]
     },
     {
-      "id": "item-muqezcsm",
+      "id": "item-muqefv2z",
       "category": "food",
       "name": {
-        "id": "Chiisai Honey Garlic Chicken Rice",
-        "en": "Chiisai Honey Garlic Chicken Rice"
+        "id": "Mie Goreng Tek-tek",
+        "en": "Mie Goreng Tek-tek"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 35000,
+      "price": 23000,
       "image": "",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Tidak Pedas",
+            "en": "Tidak Pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas Sedang",
+            "en": "Pedas Sedang"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas",
+            "en": "Pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra rawit iris",
+            "en": "Xtra rawit iris"
+          },
+          "extra": 2000
+        }
+      ]
+    },
+    {
+      "id": "item-muqffeeg",
+      "category": "snack",
+      "name": {
+        "id": "Tahu Cabe Garam",
+        "en": "Tahu Cabe Garam"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 18000,
+      "image": "images/tahu-cabe-garam-mutacvcs.jpg",
       "tags": [],
       "available": true
     },
     {
-      "id": "item-muqf2qvc",
-      "category": "food",
+      "id": "item-muqfy68r",
+      "category": "snack",
       "name": {
-        "id": "Chiisai Beef Teriyaki Rice",
-        "en": "Chiisai Beef Teriyaki Rice"
+        "id": "Tempe Mendoan",
+        "en": "Tempe Mendoan"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 40000,
+      "price": 18000,
+      "image": "images/tempe-mendoan-mutb0w4s.jpg",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "item-muqesa5a",
+      "category": "snack",
+      "name": {
+        "id": "French Fries",
+        "en": "French Fries"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 15000,
       "image": "",
       "tags": [],
       "available": true
@@ -1008,92 +1093,53 @@
             "id": "Xtra Sambal Matah",
             "en": "Xtra Sambal Matah"
           },
-          "extra": 6000
+          "extra": 4000
         },
         {
           "name": {
             "id": "Xtra Sambal Kecap",
             "en": "Xtra Sambal Kecap"
           },
-          "extra": 6000
+          "extra": 4000
         }
       ]
     },
     {
-      "id": "item-muqffeeg",
-      "category": "snack",
+      "id": "item-muxzlzpb",
+      "category": "tambahan-topping",
       "name": {
-        "id": "Tahu Cabe Garam",
-        "en": "Tahu Cabe Garam"
+        "id": "Tambahan Topping",
+        "en": "Additional Topping"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 18000,
-      "image": "images/tahu-cabe-garam-mutacvcs.jpg",
-      "tags": [],
-      "available": true
-    },
-    {
-      "id": "item-muqfy68r",
-      "category": "snack",
-      "name": {
-        "id": "Tempe Mendoan",
-        "en": "Tempe Mendoan"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 18000,
-      "image": "images/tempe-mendoan-mutb0w4s.jpg",
-      "tags": [],
-      "available": true
-    },
-    {
-      "id": "item-muxz4up4",
-      "category": "food",
-      "name": {
-        "id": "Nasi Goreng Kecombrang",
-        "en": "Nasi Goreng Kecombrang"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 30000,
+      "price": 0,
       "image": "",
       "tags": [],
       "available": true,
       "variants": [
         {
           "name": {
-            "id": "Tidak Pedas",
-            "en": "Non Spicy"
+            "id": "Telur Ceplok",
+            "en": "Fried Egg"
           },
-          "extra": 0
+          "extra": 3000
         },
         {
           "name": {
-            "id": "Pedas Sedang",
-            "en": "Medium Spicy"
+            "id": "Telur Dadar",
+            "en": "Plain Omelette"
           },
-          "extra": 0
+          "extra": 3000
         },
         {
           "name": {
-            "id": "Pedas",
-            "en": "Spicy"
+            "id": "Sosis",
+            "en": "Sausages"
           },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Rawit Iris",
-            "en": "Xtra Sliced Chili"
-          },
-          "extra": 2000
+          "extra": 3000
         }
       ]
     }
