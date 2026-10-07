@@ -628,27 +628,6 @@
       "variants": [
         {
           "name": {
-            "id": "Xtra telur ceplok",
-            "en": "Xtra telur ceplok"
-          },
-          "extra": 3000
-        },
-        {
-          "name": {
-            "id": "Xtra telur dadar",
-            "en": "Xtra telur dadar"
-          },
-          "extra": 3000
-        },
-        {
-          "name": {
-            "id": "Xtra telur ceplok 1/2 matang",
-            "en": "Xtra telur ceplok 1/2 matang"
-          },
-          "extra": 3000
-        },
-        {
-          "name": {
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
@@ -695,13 +674,6 @@
       "variants": [
         {
           "name": {
-            "id": "Telur Dadar",
-            "en": "Telur Dadar"
-          },
-          "extra": 3000
-        },
-        {
-          "name": {
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
           },
@@ -727,13 +699,6 @@
             "en": "Xtra rawit iris"
           },
           "extra": 2000
-        },
-        {
-          "name": {
-            "id": "Telur Ceplok",
-            "en": "Telur Ceplok"
-          },
-          "extra": 3000
         }
       ]
     },
@@ -1085,6 +1050,52 @@
       "image": "images/tempe-mendoan-mutb0w4s.jpg",
       "tags": [],
       "available": true
+    },
+    {
+      "id": "item-muxz4up4",
+      "category": "food",
+      "name": {
+        "id": "Nasi Goreng Kecombrang",
+        "en": "Nasi Goreng Kecombrang"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 30000,
+      "image": "",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Tidak Pedas",
+            "en": "Non Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas Sedang",
+            "en": "Medium Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas",
+            "en": "Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Rawit Iris",
+            "en": "Xtra Sliced Chili"
+          },
+          "extra": 2000
+        }
+      ]
     }
   ]
 }
