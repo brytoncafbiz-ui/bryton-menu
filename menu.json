@@ -965,6 +965,38 @@
       ]
     },
     {
+      "id": "item-muzl61pc",
+      "category": "snack",
+      "name": {
+        "id": "Pisang Goreng Keju Bryton",
+        "en": ""
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 27000,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "item-muzl1kuf",
+      "category": "snack",
+      "name": {
+        "id": "Pisang Goreng Bryton",
+        "en": "Pisang Goreng Bryton"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 22500,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
       "id": "item-muqffeeg",
       "category": "snack",
       "name": {
@@ -1011,6 +1043,52 @@
       "image": "",
       "tags": [],
       "available": true
+    },
+    {
+      "id": "item-muzl875k",
+      "category": "food",
+      "name": {
+        "id": "Kwetiaw Goreng Tek-Tek",
+        "en": "Kwetiaw Goreng Tek-Tek"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 23000,
+      "image": "",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Tidak Pedas",
+            "en": "No Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas Sedang",
+            "en": "Medium Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas",
+            "en": "Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Rawit Iris",
+            "en": "Additional Sliced Chili"
+          },
+          "extra": 2000
+        }
+      ]
     },
     {
       "id": "item-muqf3q7e",
