@@ -585,7 +585,7 @@
       "price": 40000,
       "image": "",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-muqdrl4o",
@@ -601,7 +601,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -647,7 +647,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -693,7 +693,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-muxz4up4",
@@ -709,7 +709,7 @@
       "price": 30000,
       "image": "",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -755,7 +755,7 @@
       "price": 28000,
       "image": "images/nasi-goreng-sosis-mutac0di.jpg",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -801,7 +801,7 @@
       "price": 25000,
       "image": "images/nasi-goreng-tek-tek-muqijksl.jpg",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -847,7 +847,7 @@
       "price": 25000,
       "image": "images/mie-goreng-sosis-mutabnm6.jpg",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -893,7 +893,7 @@
       "price": 25000,
       "image": "",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -932,7 +932,7 @@
       "price": 23000,
       "image": "",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
@@ -978,7 +978,7 @@
       "price": 27000,
       "image": "",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-muzl1kuf",
@@ -994,7 +994,7 @@
       "price": 22500,
       "image": "",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-muqffeeg",
@@ -1058,7 +1058,7 @@
       "price": 23000,
       "image": "",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
