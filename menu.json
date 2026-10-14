@@ -380,6 +380,22 @@
       "available": true
     },
     {
+      "id": "item-mv83vm21",
+      "category": "non-coffee",
+      "name": {
+        "id": "Bryton Lychee Bliss",
+        "en": "Bryton Lychee Bliss"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 28500,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
       "id": "croissant",
       "category": "non-coffee",
       "name": {
@@ -585,7 +601,7 @@
       "price": 40000,
       "image": "",
       "tags": [],
-      "available": false
+      "available": true
     },
     {
       "id": "item-muqdrl4o",
@@ -601,7 +617,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -647,7 +663,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -693,7 +709,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": false
+      "available": true
     },
     {
       "id": "item-muxz4up4",
@@ -709,7 +725,7 @@
       "price": 30000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -755,7 +771,7 @@
       "price": 28000,
       "image": "images/nasi-goreng-sosis-mutac0di.jpg",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -801,7 +817,7 @@
       "price": 25000,
       "image": "images/nasi-goreng-tek-tek-muqijksl.jpg",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -847,7 +863,7 @@
       "price": 25000,
       "image": "images/mie-goreng-sosis-mutabnm6.jpg",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -893,7 +909,7 @@
       "price": 25000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -932,7 +948,7 @@
       "price": 23000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -1058,7 +1074,7 @@
       "price": 23000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -1220,6 +1236,22 @@
           "extra": 3000
         }
       ]
+    },
+    {
+      "id": "item-mv83tbun",
+      "category": "non-coffee",
+      "name": {
+        "id": "Mineral Water",
+        "en": "Mineral Water"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 8000,
+      "image": "",
+      "tags": [],
+      "available": true
     }
   ]
 }
