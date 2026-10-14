@@ -1251,7 +1251,30 @@
       "price": 8000,
       "image": "",
       "tags": [],
-      "available": true
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Normal",
+            "en": "Normal"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Cold"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra Es Batu",
+            "en": "Xtra Ice"
+          },
+          "extra": 2000
+        }
+      ]
     }
   ]
 }
