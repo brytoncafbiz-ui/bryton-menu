@@ -46,6 +46,13 @@
         "id": "Tambahan Topping",
         "en": "Additional Topping"
       }
+    },
+    {
+      "id": "menu-tambahan",
+      "name": {
+        "id": "Menu Tambahan",
+        "en": "Menu Tambahan"
+      }
     }
   ],
   "items": [
@@ -1275,6 +1282,22 @@
           "extra": 2000
         }
       ]
+    },
+    {
+      "id": "item-mv85f26k",
+      "category": "menu-tambahan",
+      "name": {
+        "id": "Nasi Putih",
+        "en": "Rice"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 6000,
+      "image": "",
+      "tags": [],
+      "available": true
     }
   ]
 }
