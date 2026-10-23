@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2b1d14">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Menu Admin">
+<link rel="manifest" href="admin.webmanifest">
+<link rel="apple-touch-icon" href="icons/admin-180.png">
+<link rel="icon" href="icons/admin-192.png">
+<title>Menu Admin · Bryton Café</title>
+<style>
+  :root{--bg:#f6f2ec;--card:#fff;--ink:#2b1d14;--muted:#7a6656;--line:#e8dccb;--chip:#ece3d6;
+        --accent:#c8742c;--ok:#2f8a46;--out:#c0392b;--warn:#b5730e;--top:#2b1d14}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--bg);color:var(--ink)}
+  body{font:16px/1.45 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overscroll-behavior-y:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+  a{color:inherit}
+  input,textarea,select{font:inherit;font-size:16px;color:var(--ink)}
+  .vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+
+  /* top bar */
+  .top{position:sticky;top:0;z-index:30;background:var(--top);color:#f7ead8;display:flex;align-items:center;gap:6px;
+       padding:calc(env(safe-area-inset-top) + 8px) 10px 8px 16px;min-height:56px}
+  .top h1{flex:1;margin:0;font-size:19px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ib{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#f7ead8;flex:none}
+  .ib:active{background:rgba(255,255,255,.12)}
+  .ib.back{margin-left:-8px}
+  .done{color:#f2b46e;font-weight:700;padding:10px 8px}
+
+  .wrap{max-width:640px;margin:0 auto;padding:12px 16px calc(120px + env(safe-area-inset-bottom))}
+
+  /* search + chips */
+  .search{position:relative;margin-bottom:8px}
+  .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+  .search input{width:100%;padding:12px 14px 12px 40px;border:1px solid var(--line);border-radius:12px;background:#fff;outline:none}
+  .search input:focus{border-color:var(--accent)}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;padding:8px 14px;border-radius:999px;background:var(--chip);font-size:14.5px;font-weight:600;white-space:nowrap}
+  .chip.on{background:var(--ink);color:#fff}
+
+  h3.sec{font-size:13px;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);margin:18px 4px 8px;display:flex;justify-content:space-between}
+  h3.sec span{letter-spacing:0;text-transform:none;font-weight:500}
+
+  /* item rows */
+  .row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 10px 9px 9px;margin-bottom:8px;cursor:pointer}
+  .row:active{background:#fbf7f1}
+  .th{width:58px;height:58px;border-radius:10px;object-fit:cover;background:#efe4d4;flex:none;display:grid;place-items:center;color:#b9a48f;overflow:hidden}
+  .th img{width:100%;height:100%;object-fit:cover;display:block}
+  .row.off .th{filter:grayscale(1);opacity:.6}
+  .nm{flex:1;min-width:0}
+  .nm b{display:block;font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row.off .nm b{color:var(--muted)}
+  .meta{font-size:13.5px;color:var(--muted)}
+  .meta .p{color:var(--accent);font-weight:700}
+  .badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px}
+  .bd{font-size:11px;font-weight:700;padding:1px 6px;border-radius:5px;border:1px solid currentColor;line-height:1.5}
+  .bd.chg{color:var(--warn)} .bd.miss{color:var(--out)} .bd.hid{color:var(--muted)} .bd.np{color:var(--out)} .bd.so{color:var(--out)}
+  .swwrap{padding:6px 2px 6px 6px;display:flex}
+
+  /* switch */
+  .sw{appearance:none;-webkit-appearance:none;width:52px;height:31px;border-radius:999px;background:#d9cbbb;position:relative;flex:none;cursor:pointer;transition:background .15s;margin:0;outline:none}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:25px;height:25px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .15s}
+  .sw:checked{background:var(--ok)}
+  .sw:checked::after{transform:translateX(21px)}
+  .sw.avail:not(:checked){background:var(--out)}
+
+  .empty{text-align:center;color:var(--muted);padding:40px 10px}
+
+  /* fab + publish bar */
+  .fab{position:fixed;right:18px;bottom:calc(22px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;
+       background:var(--accent);color:#fff;font-size:32px;line-height:1;display:grid;place-items:center;box-shadow:0 6px 18px rgba(200,116,44,.45);z-index:25;transition:bottom .2s}
+  body.has-bar .fab{bottom:calc(98px + env(safe-area-inset-bottom))}
+  .pbar{position:fixed;left:0;right:0;bottom:0;z-index:28;background:var(--top);color:#f7ead8;display:flex;align-items:center;gap:8px;
+        padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+  .pbar[hidden]{display:none}
+  .pinfo{flex:1;min-width:0;line-height:1.25}
+  .pinfo b{display:block;font-size:15.5px}
+  .pinfo small{color:#cdb69b;font-size:12.5px}
+  .btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:12px 16px;border-radius:12px;font-weight:700;font-size:15.5px}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.ghost{background:transparent}
+  .pbar .btn.ghost{color:#f7ead8;border-color:rgba(255,255,255,.3)}
+  .btn:disabled{opacity:.6}
+  .btn.block{width:100%}
+  .btn.danger{color:var(--out);border-color:#f0c9c4;background:#fff}
+
+  /* toast */
+  #toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 64px);transform:translate(-50%,-20px);opacity:0;pointer-events:none;
+         background:#2b1d14;color:#fff;padding:11px 16px;border-radius:12px;font-size:14.5px;font-weight:600;z-index:60;max-width:calc(100% - 32px);
+         box-shadow:0 8px 24px rgba(0,0,0,.25);transition:all .2s}
+  #toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+  #toast.ok{background:var(--ok)} #toast.err{background:var(--out)}
+
+  /* edit form */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+  .card>.lbl{font-size:13px;font-weight:700;color:var(--muted);margin:0 0 8px;letter-spacing:.3px;text-transform:uppercase}
+  .f{display:block;margin-bottom:10px}
+  .f:last-child{margin-bottom:0}
+  .f span{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:4px}
+  .in{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:#fff;outline:none}
+  .in:focus{border-color:var(--accent)}
+  textarea.in{min-height:64px;resize:vertical}
+  .money{display:flex;align-items:center;border:1px solid var(--line);border-radius:11px;background:#fff;overflow:hidden}
+  .money:focus-within{border-color:var(--accent)}
+  .money span{padding:0 4px 0 12px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .money input{flex:1;min-width:0;border:0;padding:12px 12px 12px 4px;outline:none;background:transparent;font-weight:700}
+  .photo{position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#efe4d4;margin-bottom:12px;display:grid;place-items:center;color:#b9a48f}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+  .photo .pact{position:absolute;right:10px;bottom:10px;display:flex;gap:8px}
+  .pbtn{display:flex;align-items:center;gap:6px;background:rgba(43,29,20,.85);color:#fff;padding:10px 14px;border-radius:999px;font-weight:700;font-size:14.5px;cursor:pointer}
+  .pbtn.light{background:rgba(255,255,255,.92);color:var(--ink)}
+  .photo .warn{position:absolute;left:10px;top:10px;background:var(--out);color:#fff;font-size:12.5px;font-weight:700;padding:4px 9px;border-radius:8px}
+  .seg{display:flex;flex-wrap:wrap;gap:8px}
+  .seg button{padding:9px 14px;border-radius:999px;background:var(--chip);font-weight:600;font-size:14.5px}
+  .seg button.on{background:var(--ink);color:#fff}
+  .opt{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .opt:first-of-type{padding-top:0}
+  .opt .money{grid-column:1}
+  .opt .x{grid-column:2;justify-self:end;color:var(--out);font-weight:700;font-size:14px;padding:8px 6px}
+  .addline{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:700;padding:10px 2px 2px}
+  .hint{font-size:13px;color:var(--muted);margin:0 0 8px}
+  .trow{display:flex;align-items:center;gap:12px;padding:8px 0;cursor:pointer}
+  .trow+.trow{border-top:1px solid var(--line)}
+  .trow>span{flex:1}
+  .trow b{display:block;font-size:15.5px}
+  .trow small{color:var(--muted);font-size:13px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+
+  /* settings */
+  .nav{display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;text-decoration:none;cursor:pointer;width:100%;text-align:left}
+  .nav .ic{width:36px;height:36px;border-radius:10px;background:var(--chip);display:grid;place-items:center;flex:none}
+  .nav b{display:block;font-size:16px}
+  .nav small{color:var(--muted);font-size:13px}
+  .nav .chev{margin-left:auto;color:#b9a48f}
+  .catrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .catbar{display:flex;gap:6px;justify-content:flex-end;margin-top:8px;align-items:center}
+  .catbar small{margin-right:auto;color:var(--muted)}
+  .sbtn{padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:14px}
+  .sbtn.danger{color:var(--out)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .grid figure{margin:0}
+  .grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#efe4d4;display:block}
+  .grid figcaption{font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:3px}
+  ol.steps{padding-left:20px;margin:6px 0 12px} ol.steps li{margin:6px 0}
+  code{background:#f3ece2;padding:1px 5px;border-radius:5px;font-size:14px}
+  .loading{display:grid;place-items:center;min-height:60vh;color:var(--muted)}
+  .spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite;margin:0 auto 10px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+   Bryton Menu Admin — phone app for editing the menu.
+   Saves straight to GitHub (menu.json + photos in ONE commit) using the
+   same access key as the Sold-out switch (stock.html).
+   ===================================================================== */
+const $=s=>document.querySelector(s), app=$("#app");
+const J=JSON.stringify, clone=o=>JSON.parse(J(o));
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const rp=n=>"Rp "+Number(n||0).toLocaleString("id-ID");
+const num=n=>Number(n)?Number(n).toLocaleString("id-ID"):"";
+const slug=s=>String(s||"").toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g,"").trim().replace(/[\s_]+/g,"-").replace(/-+/g,"-").slice(0,40)||"item";
+const nameOf=it=>(it&&it.name&&(it.name.id||it.name.en))||"(no name)";
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const TAGS={bestseller:"Best seller",new:"New",spicy:"Spicy"};
+
+const I={
+  back:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+  reload:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>',
+  menu:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+  search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+  cam:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  cup:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg>',
+  chev:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>',
+  tag:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>',
+  store:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 10v10h16V10M3 10l2-6h14l2 6z"/></svg>',
+  img:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 8"/></svg>',
+  key:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l2 2"/></svg>',
+  ext:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M19 14v6H4V5h6"/></svg>',
+  phone:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>'
+};
+
+/* ---------- settings (shared with stock.html) ---------- */
+const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}};
+const guess=(()=>{const h=location.hostname, seg=location.pathname.split("/").filter(Boolean), gh=h.endsWith(".github.io");
+  return {owner:gh?h.split(".")[0]:"brytoncafbiz-ui", repo:gh?(seg.length&&!/\.html$/.test(seg[0])?seg[0]:h):"bryton-menu"};})();
+const cfg={owner:store.get("bm-owner")||guess.owner, repo:store.get("bm-repo")||guess.repo, branch:store.get("bm-branch")||"main", token:store.get("bm-token")||""};
+const siteBase=()=>location.hostname.endsWith(".github.io")?"":`https://${cfg.owner}.github.io/${cfg.repo}/`;
+
+/* ---------- GitHub API ---------- */
+async function gh(path,opt={}){
+  let r;
+  try{
+    r=await fetch(`https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}${path}`,{...opt,cache:"no-store",
+      headers:{Authorization:`Bearer ${cfg.token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",...(opt.body?{"Content-Type":"application/json"}:{})}});
+  }catch(e){ const er=new Error("offline"); er.status=0; throw er; }
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok){ const er=new Error(data.message||("HTTP "+r.status)); er.status=r.status; throw er; }
+  return data;
+}
+function explain(e){
+  if(e.status===0)   return "No internet connection. Check Wi-Fi/data and try again.";
+  if(e.status===401) return "Access key is wrong or expired. Open ☰ → Access key and paste a new one.";
+  if(e.status===403) return "The key can't save. On GitHub, set the token's Contents permission to “Read and write”.";
+  if(e.status===404) return `Can't find ${cfg.owner}/${cfg.repo} with this key. Check the token's repository access.`;
+  if(e.status===409) return "GitHub is busy with another change. Try Publish again.";
+  return "Something went wrong: "+e.message;
+}
+const b64dec=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
+const blobToB64=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]);r.onerror=()=>rej(r.error);r.readAsDataURL(b);});
+
+/* ---------- photo storage for unpublished photos (survives closing the app) ---------- */
+const idb=(()=>{let p;const db=()=>p||(p=new Promise((res,rej)=>{const r=indexedDB.open("bryton-admin",1);r.onupgradeneeded=()=>r.result.createObjectStore("photos");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);}));
+  const tx=async(mode,fn)=>{const d=await db();return new Promise((res,rej)=>{const t=d.transaction("photos",mode);const q=fn(t.objectStore("photos"));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error);});};
+  const safe=f=>async(...a)=>{try{return await f(...a)}catch(e){return undefined}};
+  return {put:safe((k,v)=>tx("readwrite",s=>s.put(v,k))),get:safe(k=>tx("readonly",s=>s.get(k))),keys:safe(()=>tx("readonly",s=>s.getAllKeys())),clear:safe(()=>tx("readwrite",s=>s.clear()))};})();
+
+/* ---------- data ---------- */
+let BASE=null, MENU=null, TREE=new Set(), photos={}, filter="all", query="", busy=false, synced=false;
+const DK="bm-admin-draft";
+
+function normalize(d){
+  d=d||{}; d.cafe=d.cafe||{}; d.categories=d.categories||[]; d.items=d.items||[];
+  if(d.cafe.name===undefined) d.cafe.name="Bryton Café";
+  ["tagline","note"].forEach(k=>{ if(typeof d.cafe[k]!=="object"||!d.cafe[k]) d.cafe[k]={id:d.cafe[k]||"",en:""}; });
+  d.categories.forEach(c=>{ c.name=c.name||{id:c.id,en:""}; });
+  d.items.forEach((it,i)=>{
+    if(!it.id) it.id="item-"+i+"-"+Date.now().toString(36);
+    if(it.variants&&it.variants.length&&it.variants.some(v=>v.extra===undefined)){   // old option format -> base price + extra
+      const prices=it.variants.map(v=>Number(v.price)||0); let base=Number(it.price)||0; if(!base) base=Math.min(...prices); it.price=base;
+      it.variants.forEach((v,k)=>{ if(v.extra===undefined){ const p=prices[k]; v.extra=p>=base?p-base:p; } delete v.price; });
+    }
+    if(it.variants&&!it.variants.length) delete it.variants;
+    (it.variants||[]).forEach(v=>{ v.name=v.name||{id:"",en:""}; });
+    it.name=it.name||{id:"",en:""}; it.description=it.description||{id:"",en:""}; it.tags=it.tags||[];
+    if(it.price===undefined) it.price=0; if(it.available===undefined) it.available=true; if(it.image===undefined) it.image="";
+  });
+  return d;
+}
+
+function changes(){
+  if(!BASE||!MENU) return {count:0,added:[],deleted:[],modified:[]};
+  const b=new Map(BASE.items.map(i=>[i.id,i])), m=new Map(MENU.items.map(i=>[i.id,i]));
+  const added=MENU.items.filter(i=>!b.has(i.id)).map(i=>i.id);
+  const deleted=BASE.items.filter(i=>!m.has(i.id)).map(i=>i.id);
+  const modified=MENU.items.filter(i=>b.has(i.id)&&J(i)!==J(b.get(i.id))).map(i=>i.id);
+  const reordered=J(MENU.items.map(i=>i.id).filter(id=>b.has(id)))!==J(BASE.items.map(i=>i.id).filter(id=>m.has(id)));
+  const cats=J(MENU.categories)!==J(BASE.categories), cafe=J(MENU.cafe)!==J(BASE.cafe);
+  return {added,deleted,modified,reordered,cats,cafe,count:added.length+deleted.length+modified.length+(reordered?1:0)+(cats?1:0)+(cafe?1:0)};
+}
+function fieldMerge(remote,base,mine){
+  const r={...remote};
+  new Set([...Object.keys(base||{}),...Object.keys(mine||{})]).forEach(k=>{
+    if(J(base[k])!==J(mine[k])){ if(mine[k]===undefined) delete r[k]; else r[k]=clone(mine[k]); }
+  });
+  return r;
+}
+// Apply MY changes on top of the LATEST menu on GitHub (keeps changes made elsewhere, e.g. sold-out switches)
+function mergeInto(latest,ch){
+  const out=clone(latest), bmap=new Map(BASE.items.map(i=>[i.id,i])), mmap=new Map(MENU.items.map(i=>[i.id,i]));
+  out.items=out.items.filter(i=>!ch.deleted.includes(i.id))
+    .map(i=>ch.modified.includes(i.id)?fieldMerge(i,bmap.get(i.id),mmap.get(i.id)):i);
+  const present=new Set(out.items.map(i=>i.id));
+  [...ch.added,...ch.modified].forEach(id=>{ if(!present.has(id)){ out.items.push(clone(mmap.get(id))); present.add(id); } });
+  if(ch.reordered||ch.added.length){
+    const byId=new Map(out.items.map(i=>[i.id,i]));
+    const mine=MENU.items.map(i=>i.id).filter(id=>byId.has(id));
+    out.items=[...mine.map(id=>byId.get(id)), ...out.items.filter(i=>!mmap.has(i.id))];
+  }
+  if(ch.cats) out.categories=clone(MENU.categories);
+  if(ch.cafe) out.cafe=fieldMerge(out.cafe,BASE.cafe,MENU.cafe);
+  return out;
+}
+const usedPaths=m=>{const s=new Set(m.items.map(i=>i.image).filter(Boolean)); if(m.cafe&&m.cafe.logo) s.add(m.cafe.logo); return s;};
+const imgSrc=p=>photos[p]?photos[p].url:encodeURI(p);
+const isMissing=it=>!!(it.image&&synced&&!TREE.has(it.image)&&!photos[it.image]);
+const itemState=id=>{const b=BASE&&BASE.items.find(i=>i.id===id), m=MENU.items.find(i=>i.id===id); return !b?"new":(J(b)!==J(m)?"edited":"");};
+
+/* ---------- draft (unpublished changes are kept if the app is closed) ---------- */
+let saveT;
+function saveDraft(){ try{ changes().count?localStorage.setItem(DK,J({base:BASE,menu:MENU})):localStorage.removeItem(DK); }catch(e){} }
+function changed(){ clearTimeout(saveT); saveT=setTimeout(saveDraft,250); updateBar(); }
+
+/* ---------- loading / syncing ---------- */
+async function sync(){
+  const br=encodeURIComponent(cfg.branch), t=Date.now();
+  const [file,tree]=await Promise.all([gh(`/contents/menu.json?ref=${br}&t=${t}`), gh(`/git/trees/${br}?recursive=1&t=${t}`)]);
+  const latest=normalize(JSON.parse(b64dec(file.content)));
+  TREE=new Set(tree.tree.filter(x=>x.type==="blob").map(x=>x.path));
+  if(BASE&&MENU){ const ch=changes(); MENU=ch.count?mergeInto(latest,ch):clone(latest); } else MENU=clone(latest);
+  BASE=latest; synced=true; saveDraft();
+}
+async function start(){
+  if(!cfg.token){ route(); return; }
+  try{ const d=JSON.parse(localStorage.getItem(DK)||"null"); if(d&&d.base&&d.menu){ BASE=normalize(d.base); MENU=normalize(d.menu); } }catch(e){}
+  const keys=await idb.keys(); for(const k of keys||[]){ const b=await idb.get(k); if(b) photos[k]={blob:b,url:URL.createObjectURL(b)}; }
+  route();
+  try{ await sync(); route(); if(changes().count) toast("You have unpublished changes — tap Publish when ready.","",4500); }
+  catch(e){ toast(explain(e),"err",0); if([401,403,404].includes(e.status)) go("#/key"); else route(); }
+}
+
+/* ---------- publishing: ONE commit with menu.json + new photos (+ removes replaced photos) ---------- */
+async function commitWith(build){
+  const br=encodeURIComponent(cfg.branch), blobCache={};
+  for(let attempt=0;;attempt++){
+    const ref=await gh(`/git/ref/heads/${br}`), head=ref.object.sha;
+    const [commit,file]=await Promise.all([gh(`/git/commits/${head}`), gh(`/contents/menu.json?ref=${head}`)]);
+    const tree=await gh(`/git/trees/${commit.tree.sha}?recursive=1`);
+    const paths=new Set(tree.tree.filter(x=>x.type==="blob").map(x=>x.path));
+    const latest=normalize(JSON.parse(b64dec(file.content)));
+    const {final,entries,message}=await build(latest,paths,blobCache);
+    if(!entries.length) return {final,paths};
+    const nt=await gh(`/git/trees`,{method:"POST",body:J({base_tree:commit.tree.sha,tree:entries})});
+    const nc=await gh(`/git/commits`,{method:"POST",body:J({message,tree:nt.sha,parents:[head]})});
+    try{ await gh(`/git/refs/heads/${br}`,{method:"PATCH",body:J({sha:nc.sha,force:false})}); }
+    catch(e){ if((e.status===422||e.status===409)&&attempt<3){ await sleep(600); continue; } throw e; }   // someone else saved at the same moment -> redo on top of theirs
+    entries.forEach(en=>en.sha===null?paths.delete(en.path):paths.add(en.path));
+    return {final,paths};
+  }
+}
+function commitMessage(ch){
+  const nm=id=>nameOf(MENU.items.find(i=>i.id===id)||BASE.items.find(i=>i.id===id));
+  const list=a=>a.slice(0,3).map(nm).join(", ")+(a.length>3?` +${a.length-3}`:"");
+  const p=[]; if(ch.added.length) p.push("add "+list(ch.added)); if(ch.modified.length) p.push("edit "+list(ch.modified));
+  if(ch.deleted.length) p.push("delete "+list(ch.deleted)); if(ch.cats) p.push("categories"); if(ch.cafe) p.push("café info"); if(ch.reordered&&!p.length) p.push("order");
+  return ("Menu: "+p.join("; ")).slice(0,200);
+}
+async function publish(){
+  const ch=changes(); if(!ch.count||busy) return;
+  const noName=MENU.items.find(i=>!(i.name.id||i.name.en).trim());
+  if(noName){ toast("An item has no name yet.","err"); go("#/item/"+encodeURIComponent(noName.id)); return; }
+  const noCat=MENU.items.find(i=>!MENU.categories.some(c=>c.id===i.category));
+  if(noCat){ toast(`“${nameOf(noCat)}” has no category.`,"err"); go("#/item/"+encodeURIComponent(noCat.id)); return; }
+  busy=true; updateBar();
+  try{
+    const {final,paths}=await commitWith(async(latest,paths,blobCache)=>{
+      const final=mergeInto(latest,ch), used=usedPaths(final), entries=[];
+      for(const p of Object.keys(photos)){
+        if(!used.has(p)||paths.has(p)) continue;
+        if(!blobCache[p]) blobCache[p]=(await gh(`/git/blobs`,{method:"POST",body:J({content:await blobToB64(photos[p].blob),encoding:"base64"})})).sha;
+        entries.push({path:p,mode:"100644",type:"blob",sha:blobCache[p]});
+      }
+      const old=new Set();
+      [...ch.modified,...ch.deleted].forEach(id=>{ const b=BASE.items.find(i=>i.id===id), m=MENU.items.find(i=>i.id===id); if(b&&b.image&&(!m||m.image!==b.image)) old.add(b.image); });
+      if(ch.cafe&&BASE.cafe.logo&&BASE.cafe.logo!==MENU.cafe.logo) old.add(BASE.cafe.logo);
+      old.forEach(p=>{ if(p.startsWith("images/")&&!used.has(p)&&paths.has(p)) entries.push({path:p,mode:"100644",type:"blob",sha:null}); });
+      entries.push({path:"menu.json",mode:"100644",type:"blob",content:J(final,null,2)+"\n"});
+      return {final,entries,message:commitMessage(ch)};
+    });
+    BASE=clone(final); MENU=clone(final); TREE=paths; saveDraft(); await idb.clear();
+    toast("Published ✓  Customers will see it in about 1 minute.","ok",5000);
+    watchLive(final);
+  }catch(e){ toast(explain(e)+" Your changes are kept.","err",0); }
+  busy=false; route();
+}
+async function watchLive(final){
+  const want=J(final), t0=Date.now();
+  while(Date.now()-t0<180000){
+    await sleep(7000); if(changes().count) return;
+    try{ const live=normalize(await (await fetch(`${siteBase()}menu.json?v=${Date.now()}`,{cache:"no-store"})).json()); if(J(live)===want){ toast("Live on the customer menu ✓","ok",4000); return; } }catch(e){}
+  }
+}
+
+/* ---------- photos ---------- */
+function resize(file,max,type){
+  return new Promise((res,rej)=>{
+    const img=new Image(), u=URL.createObjectURL(file);
+    img.onload=()=>{ const s=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight)), c=document.createElement("canvas");
+      c.width=Math.round(img.naturalWidth*s); c.height=Math.round(img.naturalHeight*s); const g=c.getContext("2d");
+      if(type==="image/jpeg"){ g.fillStyle="#fff"; g.fillRect(0,0,c.width,c.height); }
+      g.drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>b?res(b):rej(new Error("encode")),type,0.82); };
+    img.onerror=()=>{ URL.revokeObjectURL(u); rej(new Error("decode")); }; img.src=u;
+  });
+}
+async function addPhoto(file,base,isLogo){
+  toast("Preparing photo…","",0);
+  try{
+    const type=isLogo?"image/png":"image/jpeg";
+    const blob=await resize(file,isLogo?512:900,type);
+    const path=`images/${slug(base)}-${Date.now().toString(36)}.${isLogo?"png":"jpg"}`;
+    photos[path]={blob,url:URL.createObjectURL(blob)}; await idb.put(path,blob);
+    toast(`Photo ready (${Math.round(blob.size/1024)} KB)`,"ok",2000);
+    return path;
+  }catch(e){ toast("Couldn't read that photo. Try another one (JPG or PNG).","err"); return null; }
+}
+
+/* ---------- routing (works with Android back button & iPhone swipe-back) ---------- */
+function go(h){ const d=(history.state&&history.state.d||0)+1; history.pushState({d},"",h); route(); }
+function back(parent){ if(history.state&&history.state.d>0) history.back(); else { history.replaceState({d:0},"",parent||"#/"); route(); } }
+addEventListener("popstate",route);
+let lastRoute="";
+function route(){
+  const h=location.hash||"#/";
+  if(lastRoute.startsWith("#/item/")&&h!==lastRoute) dropIfEmpty(decodeURIComponent(lastRoute.slice(7)));
+  lastRoute=h; window.scrollTo(0,0);
+  if(h==="#/key"||!cfg.token) return viewKey();
+  if(!MENU) return viewLoading();
+  if(h.startsWith("#/item/")) return viewEdit(decodeURIComponent(h.slice(7)));
+  if(h==="#/settings") return viewSettings();
+  if(h==="#/cats") return viewCats();
+  if(h==="#/cafe") return viewCafe();
+  if(h==="#/photos") return viewPhotos();
+  viewList();
+}
+function dropIfEmpty(id){
+  const i=MENU&&MENU.items.findIndex(x=>x.id===id); if(i==null||i<0) return;
+  const it=MENU.items[i];
+  if(!BASE.items.some(x=>x.id===id)&&!(it.name.id||it.name.en).trim()&&!it.image){ MENU.items.splice(i,1); changed(); }
+}
+
+/* ---------- shared bits ---------- */
+let toastT;
+function toast(m,type="",ms=3000){ const t=$("#toast"); t.textContent=m; t.className="show "+type; clearTimeout(toastT); if(ms) toastT=setTimeout(()=>t.className="",ms); }
+$("#toast").onclick=()=>$("#toast").className="";
+function topbar(title,{backTo,right=""}={}){
+  return `<header class="top">${backTo?`<button class="ib back" data-act="back" data-to="${backTo}" aria-label="Back">${I.back}</button>`:""}<h1>${esc(title)}</h1>${right}</header>`;
+}
+function updateBar(){
+  const bar=$("#pbar"); if(!bar) return;
+  const n=changes().count; bar.hidden=!n; document.body.classList.toggle("has-bar",!!n);
+  if(!n) return;
+  bar.innerHTML=`<div class="pinfo"><b>${n} change${n>1?"s":""}</b><small>${busy?"Saving to GitHub…":"Not published yet"}</small></div>
+    <button class="btn ghost" data-act="undoall" ${busy?"disabled":""}>Undo</button>
+    <button class="btn primary" data-act="publish" ${busy?"disabled":""}>${busy?"Publishing…":"Publish"}</button>`;
+}
+const BAR=`<div class="pbar" id="pbar" hidden></div>`;
+const catName=id=>{const c=MENU.categories.find(c=>c.id===id); return c?(c.name.id||c.name.en):"Other";};
+
+/* ---------- view: loading ---------- */
+function viewLoading(){ app.innerHTML=topbar("Bryton Menu")+`<div class="loading"><div><div class="spin"></div>Loading menu…</div></div>`; }
+
+/* ---------- view: list ---------- */
+function viewList(){
+  app.innerHTML=topbar("Bryton Menu",{right:`<button class="ib" data-act="reload" aria-label="Reload">${I.reload}</button><button class="ib" data-go="#/settings" aria-label="More">${I.menu}</button>`})+
+  `<main class="wrap">
+    <label class="search">${I.search}<input id="q" type="search" placeholder="Search menu…" value="${esc(query)}" autocomplete="off"></label>
+    <div class="chips" id="chips"></div>
+    <div id="items"></div>
+  </main>
+  <button class="fab" data-act="new" aria-label="Add item">+</button>${BAR}`;
+  renderItems(); updateBar();
+}
+function renderItems(){
+  const outN=MENU.items.filter(i=>i.available===false).length;
+  const missN=MENU.items.filter(isMissing).length;
+  const chips=[["all","All"],...MENU.categories.map(c=>[c.id,c.name.id||c.name.en]),["out",`Sold out${outN?` (${outN})`:""}`]];
+  if(missN) chips.push(["miss",`Photo missing (${missN})`]);
+  if(!chips.some(c=>c[0]===filter)) filter="all";
+  $("#chips").innerHTML=chips.map(([id,l])=>`<button class="chip ${filter===id?"on":""}" data-chip="${esc(id)}">${esc(l)}</button>`).join("");
+  const q=query.trim().toLowerCase();
+  const list=MENU.items.filter(it=>{
+    if(filter==="out"&&it.available!==false) return false;
+    if(filter==="miss"&&!isMissing(it)) return false;
+    if(!["all","out","miss"].includes(filter)&&it.category!==filter) return false;
+    if(q&&![it.name.id,it.name.en].join(" ").toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const groups=[...MENU.categories.map(c=>({id:c.id,name:c.name.id||c.name.en})),{id:null,name:"Other"}].map(g=>({...g,items:list.filter(it=>g.id===null?!MENU.categories.some(c=>c.id===it.category):it.category===g.id)})).filter(g=>g.items.length);
+  $("#items").innerHTML=groups.length?groups.map(g=>`<h3 class="sec">${esc(g.name)}<span>${g.items.length}</span></h3>`+g.items.map(rowHTML).join("")).join("")
+    :`<div class="empty">${MENU.items.length?"No items found.":"No items yet. Tap + to add your first item."}</div>`;
+}
+function rowHTML(it){
+  const st=itemState(it.id), on=it.available!==false, opts=(it.variants||[]).length;
+  const b=[];
+  if(st) b.push(`<span class="bd chg">${st==="new"?"NEW":"EDITED"}</span>`);
+  if(it.hidden) b.push(`<span class="bd hid">HIDDEN</span>`);
+  if(isMissing(it)) b.push(`<span class="bd miss">PHOTO MISSING</span>`);
+  if(!Number(it.price)&&!opts) b.push(`<span class="bd np">NO PRICE</span>`);
+  return `<div class="row ${on?"":"off"}" data-edit="${esc(it.id)}">
+    <div class="th">${it.image&&!isMissing(it)?`<img src="${esc(imgSrc(it.image))}" alt="" loading="lazy" decoding="async">`:I.cup}</div>
+    <div class="nm"><b>${esc(nameOf(it))}</b><div class="meta"><span class="p">${rp(it.price)}</span>${opts?` · ${opts} option${opts>1?"s":""}`:""}${on?"":` · <b style="display:inline;color:var(--out);font-size:13.5px">Sold out</b>`}</div>${b.length?`<div class="badges">${b.join("")}</div>`:""}</div>
+    <label class="swwrap" aria-label="Available"><input type="checkbox" class="sw avail" data-avail="${esc(it.id)}" ${on?"checked":""}></label>
+  </div>`;
+}
+
+/* ---------- view: edit item ---------- */
+function viewEdit(id){
+  const it=MENU.items.find(i=>i.id===id);
+  if(!it){ history.replaceState({d:0},"","#/"); return viewList(); }
+  const isNew=!BASE.items.some(i=>i.id===id);
+  app.innerHTML=topbar(isNew?"New item":"Edit item",{backTo:"#/",right:`<button class="done" data-act="back" data-to="#/">Done</button>`})+
+    `<main class="wrap" id="edit" data-id="${esc(id)}"></main>${BAR}`;
+  renderEdit(); updateBar();
+  if(isNew&&!it.name.id&&!it.name.en) setTimeout(()=>{ const f=$('[data-f="name.id"]'); f&&f.focus(); },150);
+}
+const curItem=()=>{ const el=$("#edit"); return el&&MENU.items.find(i=>i.id===el.dataset.id); };
+function renderEdit(){
+  const it=curItem(); if(!it) return;
+  const base=BASE.items.find(i=>i.id===it.id), modified=base&&J(base)!==J(it), miss=isMissing(it);
+  $("#edit").innerHTML=`
+  <div class="photo">
+    ${it.image&&!miss?`<img src="${esc(imgSrc(it.image))}" alt="">`:`<div style="text-align:center">${I.cup}<div style="font-size:14px;margin-top:4px">${miss?"Photo file missing":"No photo yet"}</div></div>`}
+    ${miss?`<span class="warn">Photo missing — please choose it again</span>`:""}
+    <div class="pact">
+      ${it.image?`<button class="pbtn light" data-act="nophoto">Remove</button>`:""}
+      <label class="pbtn">${I.cam}${it.image?"Change photo":"Add photo"}<input type="file" accept="image/*" class="vh" data-photo></label>
+    </div>
+  </div>
+
+  <div class="card"><div class="lbl">Name</div>
+    <label class="f"><span>Indonesia</span><input class="in" data-f="name.id" value="${esc(it.name.id)}" placeholder="mis. Es Kopi Susu" enterkeyhint="next"></label>
+    <label class="f"><span>English</span><input class="in" data-f="name.en" value="${esc(it.name.en)}" placeholder="e.g. Iced Coffee Latte" enterkeyhint="done"></label>
+  </div>
+
+  <div class="card"><div class="lbl">Price</div>
+    <div class="money"><span>Rp</span><input inputmode="numeric" pattern="[0-9]*" data-f="price" value="${num(it.price)}" placeholder="0"></div>
+  </div>
+
+  <div class="card"><div class="lbl">Category</div>
+    <div class="seg">${MENU.categories.map(c=>`<button class="${c.id===it.category?"on":""}" data-setcat="${esc(c.id)}">${esc(c.name.id||c.name.en)}</button>`).join("")}</div>
+    ${MENU.categories.length?"":`<p class="hint">No categories yet — add one in ☰ → Categories.</p>`}
+  </div>
+
+  <div class="card"><div class="lbl">Description <span style="text-transform:none;font-weight:500">(optional)</span></div>
+    <label class="f"><span>Indonesia</span><textarea class="in" data-f="description.id" rows="2">${esc(it.description.id)}</textarea></label>
+    <label class="f"><span>English</span><textarea class="in" data-f="description.en" rows="2">${esc(it.description.en)}</textarea></label>
+  </div>
+
+  <div class="card"><div class="lbl">Options / add-ons <span style="text-transform:none;font-weight:500">(optional)</span></div>
+    <p class="hint">e.g. Iced +2.000, Extra shot +5.000. Enter only the <b>extra</b> charge; 0 = no extra.</p>
+    ${(it.variants||[]).map((v,i)=>`<div class="opt">
+      <input class="in" placeholder="Nama (ID)" data-v="${i}" data-vf="id" value="${esc(v.name.id)}">
+      <input class="in" placeholder="Name (EN)" data-v="${i}" data-vf="en" value="${esc(v.name.en)}">
+      <div class="money"><span>+ Rp</span><input inputmode="numeric" pattern="[0-9]*" data-v="${i}" data-vf="extra" value="${num(v.extra)}" placeholder="0"></div>
+      <button class="x" data-act="delopt" data-i="${i}">Remove</button></div>`).join("")}
+    <button class="addline" data-act="addopt">+ Add option</button>
+  </div>
+
+  <div class="card"><div class="lbl">Labels</div>
+    <div class="seg">${Object.entries(TAGS).map(([k,l])=>`<button class="${it.tags.includes(k)?"on":""}" data-tag="${k}">${l}</button>`).join("")}</div>
+  </div>
+
+  <div class="card">
+    <label class="trow"><span><b>Available</b><small>Off = shows “Habis / Sold out”</small></span><input type="checkbox" class="sw avail" data-flag="available" ${it.available!==false?"checked":""}></label>
+    <label class="trow"><span><b>Hide from menu</b><small>Customers won't see this item</small></span><input type="checkbox" class="sw" data-flag="hidden" ${it.hidden?"checked":""}></label>
+  </div>
+
+  <div class="two"><button class="btn" data-act="up">↑ Move up</button><button class="btn" data-act="down">↓ Move down</button></div>
+  ${modified?`<button class="btn block" data-act="revert" style="margin-bottom:10px">Undo changes to this item</button>`:""}
+  <button class="btn block danger" data-act="delete">Delete item</button>`;
+}
+function setPath(o,p,v){ const k=p.split("."); while(k.length>1){ const x=k.shift(); o[x]=o[x]||{}; o=o[x]; } o[k[0]]=v; }
+function moneyFrom(input){ const n=Number(input.value.replace(/\D/g,"").slice(0,9))||0; input.value=n?n.toLocaleString("id-ID"):""; return n; }
+
+/* ---------- view: settings ---------- */
+function viewSettings(){
+  const unused=unusedPhotos().length, miss=MENU.items.filter(isMissing).length;
+  const nav=(go,ic,t,s,ext)=>`<${ext?`a href="${go}" target="_blank" rel="noopener"`:`button data-go="${go}"`} class="nav"><span class="ic">${ic}</span><span><b>${t}</b><small>${s}</small></span><span class="chev">${ext?I.ext:I.chev}</span></${ext?"a":"button"}>`;
+  app.innerHTML=topbar("More",{backTo:"#/"})+`<main class="wrap">
+    ${nav("#/cats",I.tag,"Categories",`${MENU.categories.length} categories · rename, reorder, add`)}
+    ${nav("#/cafe",I.store,"Café info & logo","Name, tagline, note at the bottom")}
+    ${nav("#/photos",I.img,"Photos",[miss?`${miss} missing`:"",unused?`${unused} unused`:"" ].filter(Boolean).join(" · ")||"All photos OK")}
+    ${nav("#/key",I.key,"Access key",cfg.token?`Saved on this phone (…${esc(cfg.token.slice(-4))})`:"Not set")}
+    ${nav(siteBase()||"./",I.ext,"Open customer menu","See what customers see",true)}
+    <div class="card" style="margin-top:14px"><div class="lbl">${I.phone} Put this app on your home screen</div>
+      <p class="hint" style="margin-bottom:4px"><b>iPhone (Safari):</b> tap Share <b>⬆︎</b> → <b>Add to Home Screen</b> → Add.</p>
+      <p class="hint" style="margin:0"><b>Android (Chrome):</b> tap <b>⋮</b> → <b>Add to Home screen</b> / <b>Install app</b>.</p>
+    </div>
+  </main>${BAR}`;
+  updateBar();
+}
+
+/* ---------- view: categories ---------- */
+function viewCats(){
+  app.innerHTML=topbar("Categories",{backTo:"#/settings"})+`<main class="wrap">
+    <p class="hint">Shown as tabs on the customer menu, in this order.</p>
+    ${MENU.categories.map((c,i)=>{const n=MENU.items.filter(x=>x.category===c.id).length; return `<div class="card" data-ci="${i}">
+      <div class="catrow"><label class="f"><span>Indonesia</span><input class="in" data-cf="id" value="${esc(c.name.id)}"></label>
+      <label class="f"><span>English</span><input class="in" data-cf="en" value="${esc(c.name.en)}"></label></div>
+      <div class="catbar"><small>${n} item${n===1?"":"s"}</small><button class="sbtn" data-act="cup">↑</button><button class="sbtn" data-act="cdown">↓</button><button class="sbtn danger" data-act="cdel">Delete</button></div></div>`;}).join("")}
+    <button class="btn block primary" data-act="cadd">+ Add category</button>
+  </main>${BAR}`;
+  updateBar();
+}
+
+/* ---------- view: café info ---------- */
+function viewCafe(){
+  const c=MENU.cafe, logoMiss=c.logo&&synced&&!TREE.has(c.logo)&&!photos[c.logo];
+  app.innerHTML=topbar("Café info",{backTo:"#/settings"})+`<main class="wrap">
+    <div class="card"><div class="lbl">Logo</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="th" style="width:72px;height:72px;border-radius:50%">${c.logo&&!logoMiss?`<img src="${esc(imgSrc(c.logo))}" alt="">`:`<b style="font-size:28px;color:var(--accent)">B</b>`}</div>
+        <label class="btn">${c.logo&&!logoMiss?"Change logo":"Add logo"}<input type="file" accept="image/*" class="vh" data-logo></label>
+      </div>
+      <p class="hint" style="margin:8px 0 0">Square image works best. Shown as a circle at the top of the menu.</p>
+    </div>
+    <div class="card"><div class="lbl">Café name</div><input class="in" data-cafe="name" value="${esc(c.name)}"></div>
+    <div class="card"><div class="lbl">Tagline</div>
+      <label class="f"><span>Indonesia</span><input class="in" data-cafe="tagline.id" value="${esc(c.tagline.id)}"></label>
+      <label class="f"><span>English</span><input class="in" data-cafe="tagline.en" value="${esc(c.tagline.en)}"></label></div>
+    <div class="card"><div class="lbl">Note at the bottom of the menu</div>
+      <label class="f"><span>Indonesia</span><textarea class="in" data-cafe="note.id" rows="2">${esc(c.note.id)}</textarea></label>
+      <label class="f"><span>English</span><textarea class="in" data-cafe="note.en" rows="2">${esc(c.note.en)}</textarea></label></div>
+  </main>${BAR}`;
+  updateBar();
+}
+
+/* ---------- view: photos (missing + clean-up) ---------- */
+function unusedPhotos(){
+  const used=usedPaths(MENU); if(BASE) usedPaths(BASE).forEach(p=>used.add(p));
+  return [...TREE].filter(p=>p.startsWith("images/")&&/\.(jpe?g|png|webp|gif|heic)$/i.test(p)&&!used.has(p));
+}
+function viewPhotos(){
+  const miss=MENU.items.filter(isMissing), unused=unusedPhotos();
+  app.innerHTML=topbar("Photos",{backTo:"#/settings"})+`<main class="wrap">
+    <h3 class="sec">Items with a missing photo<span>${miss.length}</span></h3>
+    ${miss.length?miss.map(rowHTML).join("")+`<p class="hint">Tap an item, then “Change photo” to choose its photo again.</p>`:`<div class="card hint" style="margin:0 0 8px">All items' photos are OK ✓</div>`}
+    <h3 class="sec">Unused photo files<span>${unused.length}</span></h3>
+    ${unused.length?`<p class="hint">These files are in your GitHub images folder but no item uses them.</p>
+      <div class="grid" style="margin-bottom:12px">${unused.map(p=>`<figure><img src="${esc(encodeURI(p))}" alt="" loading="lazy"><figcaption>${esc(p.slice(7))}</figcaption></figure>`).join("")}</div>
+      <button class="btn block danger" data-act="cleanup" ${busy?"disabled":""}>Delete ${unused.length} unused photo${unused.length>1?"s":""}</button>`
+      :`<div class="card hint" style="margin:0">No unused photos ✓</div>`}
+  </main>${BAR}`;
+  updateBar();
+}
+async function cleanup(){
+  if(changes().count){ toast("Publish your changes first, then clean up.","err"); return; }
+  const n=unusedPhotos().length; if(!n||busy||!confirm(`Delete ${n} unused photo file${n>1?"s":""} from GitHub?`)) return;
+  busy=true; viewPhotos();
+  try{
+    const {paths}=await commitWith(async(latest,paths)=>{
+      const used=usedPaths(latest);
+      const del=[...paths].filter(p=>p.startsWith("images/")&&/\.(jpe?g|png|webp|gif|heic)$/i.test(p)&&!used.has(p));
+      return {final:latest,entries:del.map(p=>({path:p,mode:"100644",type:"blob",sha:null})),message:`Photos: removed ${del.length} unused file${del.length>1?"s":""}`};
+    });
+    TREE=paths; toast("Unused photos deleted ✓","ok");
+  }catch(e){ toast(explain(e),"err",0); }
+  busy=false; route();
+}
+
+/* ---------- view: access key ---------- */
+function viewKey(){
+  const first=!cfg.token;
+  app.innerHTML=topbar(first?"Set up Menu Admin":"Access key",{backTo:first?"":"#/settings"})+`<main class="wrap">
+    <div class="card"><div class="lbl">${first?"One-time setup on this phone":"Replace the access key"}</div>
+      <p class="hint">This app saves your menu straight to GitHub. It needs an access key that can only change the <b>${esc(cfg.repo)}</b> repository. (If you already set up the Sold-out switch on this phone, the same key works.)</p>
+      <ol class="steps">
+        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener"><b>GitHub → New fine-grained token</b></a> and sign in as <b>${esc(cfg.owner)}</b>.</li>
+        <li><b>Token name:</b> <code>Bryton menu admin</code></li>
+        <li><b>Expiration:</b> the longest option (e.g. 1 year).</li>
+        <li><b>Repository access:</b> Only select repositories → <b>${esc(cfg.repo)}</b>.</li>
+        <li><b>Permissions → Contents:</b> <b>Read and write</b>.</li>
+        <li><b>Generate token</b>, copy it (starts with <code>github_pat_</code>), paste below.</li>
+      </ol>
+      <label class="f"><span>Access key</span><input class="in" type="password" id="tok" autocomplete="off" placeholder="${cfg.token?`Saved key …${esc(cfg.token.slice(-4))} (paste new to replace)`:"github_pat_…"}"></label>
+      <button class="btn block primary" data-act="savekey">Save key</button>
+      ${cfg.token?`<button class="btn block danger" data-act="forgetkey" style="margin-top:10px">Remove key from this phone</button>`:""}
+      <p class="hint" style="margin:12px 0 0">The key stays only on this phone. If you lose the phone, delete the token on GitHub (Settings → Developer settings → Personal access tokens).</p>
+    </div>
+  </main>`;
+}
+
+/* ---------- events ---------- */
+app.addEventListener("click",async e=>{
+  const t=e.target;
+  if(t.closest(".swwrap")) return;                                   // list switch handled on "change"
+  const g=t.closest("[data-go]"); if(g){ go(g.dataset.go); return; }
+  const row=t.closest("[data-edit]"); if(row){ go("#/item/"+encodeURIComponent(row.dataset.edit)); return; }
+  const chip=t.closest("[data-chip]"); if(chip){ filter=chip.dataset.chip; renderItems(); return; }
+  const it=curItem();
+  const sc=t.closest("[data-setcat]"); if(sc&&it){ const cat=sc.dataset.setcat; if(it.category!==cat){ const i=MENU.items.indexOf(it); MENU.items.splice(i,1); let j=-1; MENU.items.forEach((x,k)=>{ if(x.category===cat) j=k; }); MENU.items.splice(j<0?MENU.items.length:j+1,0,it); it.category=cat; } renderEdit(); changed(); return; }
+  const tg=t.closest("[data-tag]"); if(tg&&it){ const k=tg.dataset.tag; it.tags=it.tags.includes(k)?it.tags.filter(x=>x!==k):[...it.tags,k]; renderEdit(); changed(); return; }
+  const b=t.closest("[data-act]"); if(!b) return;
+  const a=b.dataset.act;
+  if(a==="back") return back(b.dataset.to);
+  if(a==="savekey"){
+    const tok=$("#tok").value.trim(); if(!tok&&!cfg.token){ toast("Paste the access key first.","err"); return; }
+    const prev=cfg.token; if(tok) cfg.token=tok; b.disabled=true; b.textContent="Checking…";
+    try{ await sync(); store.set("bm-token",cfg.token); store.set("bm-owner",cfg.owner); store.set("bm-repo",cfg.repo); store.set("bm-branch",cfg.branch);
+      toast("Key saved ✓","ok"); history.replaceState({d:0},"","#/"); route(); }
+    catch(err){ cfg.token=prev; toast(explain(err),"err",0); b.disabled=false; b.textContent="Save key"; }
+    return;
+  }
+  if(a==="forgetkey"){ if(!confirm("Remove the access key from this phone?")) return; store.set("bm-token",null); cfg.token=""; route(); return; }
+  if(a==="reload"){ if(busy) return; toast("Checking for updates…","",0); try{ await sync(); route(); toast("Up to date ✓","ok",1500); }catch(err){ toast(explain(err),"err",0); } return; }
+  if(a==="new"){
+    const cat=!["all","out","miss"].includes(filter)?filter:(MENU.categories[0]&&MENU.categories[0].id)||"";
+    const n={id:"item-"+Date.now().toString(36),category:cat,name:{id:"",en:""},description:{id:"",en:""},price:0,image:"",tags:[],available:true};
+    let j=-1; MENU.items.forEach((x,k)=>{ if(x.category===cat) j=k; }); MENU.items.splice(j<0?MENU.items.length:j+1,0,n);
+    go("#/item/"+encodeURIComponent(n.id)); return;
+  }
+  if(a==="publish") return publish();
+  if(a==="undoall"){ if(!confirm("Undo all unpublished changes?")) return; MENU=clone(BASE); await idb.clear(); saveDraft(); history.replaceState({d:0},"","#/"); route(); toast("Changes undone"); return; }
+  if(a==="addopt"&&it){ it.variants=it.variants||[]; it.variants.push({name:{id:"",en:""},extra:0}); renderEdit(); changed(); const ins=document.querySelectorAll('[data-vf="id"]'); ins.length&&ins[ins.length-1].focus(); return; }
+  if(a==="delopt"&&it){ it.variants.splice(+b.dataset.i,1); if(!it.variants.length) delete it.variants; renderEdit(); changed(); return; }
+  if(a==="nophoto"&&it){ it.image=""; renderEdit(); changed(); return; }
+  if(a==="revert"&&it){ const base=BASE.items.find(i=>i.id===it.id); if(base){ MENU.items[MENU.items.indexOf(it)]=clone(base); renderEdit(); changed(); toast("Item restored"); } return; }
+  if(a==="delete"&&it){ if(!confirm(`Delete “${nameOf(it)}”?\n\nTip: to remove it only for today, switch off “Available” instead.`)) return; MENU.items.splice(MENU.items.indexOf(it),1); changed(); back("#/"); return; }
+  if((a==="up"||a==="down")&&it){
+    const arr=MENU.items, d=a==="up"?-1:1, i=arr.indexOf(it); let j=i+d; while(j>=0&&j<arr.length&&arr[j].category!==it.category) j+=d;
+    if(j<0||j>=arr.length){ toast(`Already at the ${d<0?"top":"bottom"} of ${catName(it.category)}`); return; }
+    [arr[i],arr[j]]=[arr[j],arr[i]]; changed(); toast(`Moved ${d<0?"up":"down"}`,"",1200); return;
+  }
+  if(!MENU) return;
+  const ci=b.closest("[data-ci]")?+b.closest("[data-ci]").dataset.ci:-1, cats=MENU.categories;
+  if(a==="cadd"){ const n=prompt("New category name (Indonesia):"); if(!n||!n.trim()) return; let id=slug(n),k=2; while(cats.some(c=>c.id===id)) id=slug(n)+"-"+k++; cats.push({id,name:{id:n.trim(),en:""}}); changed(); viewCats(); return; }
+  if(a==="cup"||a==="cdown"){ const j=ci+(a==="cup"?-1:1); if(j<0||j>=cats.length) return; [cats[ci],cats[j]]=[cats[j],cats[ci]]; changed(); viewCats(); return; }
+  if(a==="cdel"){ const c=cats[ci], n=MENU.items.filter(x=>x.category===c.id).length; if(n){ toast(`Move or delete its ${n} item${n>1?"s":""} first.`,"err"); return; } if(confirm(`Delete category “${c.name.id||c.name.en}”?`)){ cats.splice(ci,1); changed(); viewCats(); } return; }
+  if(a==="cleanup") return cleanup();
+});
+
+app.addEventListener("input",e=>{
+  const t=e.target;
+  if(t.id==="q"){ query=t.value; renderItems(); return; }
+  const it=curItem();
+  if(it&&t.dataset.f){ const f=t.dataset.f; setPath(it,f,f==="price"?moneyFrom(t):t.value); changed(); return; }
+  if(it&&t.dataset.v!==undefined){ const v=it.variants[+t.dataset.v]; if(t.dataset.vf==="extra") v.extra=moneyFrom(t); else v.name[t.dataset.vf]=t.value; changed(); return; }
+  const cr=t.closest("[data-ci]"); if(cr&&t.dataset.cf){ MENU.categories[+cr.dataset.ci].name[t.dataset.cf]=t.value; changed(); return; }
+  if(t.dataset.cafe){ setPath(MENU.cafe,t.dataset.cafe,t.value); changed(); return; }
+});
+
+app.addEventListener("change",async e=>{
+  const t=e.target;
+  if(t.dataset.avail){ const it=MENU.items.find(i=>i.id===t.dataset.avail); if(!it) return; it.available=t.checked; changed();
+    const row=t.closest(".row"); if(row) row.outerHTML=rowHTML(it); return; }
+  const it=curItem();
+  if(it&&t.dataset.flag){ if(t.dataset.flag==="hidden"){ if(t.checked) it.hidden=true; else delete it.hidden; } else it.available=t.checked; changed(); return; }
+  if(t.hasAttribute("data-photo")&&t.files[0]&&it){ const p=await addPhoto(t.files[0],it.name.en||it.name.id||"item"); if(p){ it.image=p; renderEdit(); changed(); } return; }
+  if(t.hasAttribute("data-logo")&&t.files[0]){ const p=await addPhoto(t.files[0],"logo",true); if(p){ MENU.cafe.logo=p; changed(); viewCafe(); } return; }
+});
+
+addEventListener("beforeunload",e=>{ if(busy){ e.preventDefault(); e.returnValue=""; } });
+history.replaceState({d:0},"",location.hash||"#/");
+start();
+</script>
+</body>
+</html>
