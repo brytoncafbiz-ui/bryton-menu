@@ -217,6 +217,17 @@ function explain(e){
   if(e.status===409) return "GitHub is busy with another change. Try Publish again.";
   return "Something went wrong: "+e.message;
 }
+// Clean a pasted key: remove spaces, line breaks and invisible characters that chat apps add
+function cleanKey(s){ s=String(s||"").replace(/[\s\u00A0\u200B-\u200D\u2060\uFEFF]/g,""); const m=s.match(/(github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,})/); return m?m[1]:s; }
+function keyFormatProblem(k){
+  if(!/^(github_pat_|gh[pousr]_)/.test(k)) return `This doesn't look like a GitHub access key. It must start with “github_pat_”, but what you pasted starts with “${k.slice(0,4)}…” (${k.length} characters). Copy the key again from GitHub.`;
+  return "";
+}
+function rejectedKeyMsg(k){
+  const n=k.length, cut=k.startsWith("github_pat_")&&n<85;
+  return "GitHub rejected this key. "+(cut?`It looks cut off: ${n} characters, but a full key is about 93. Copy it again in one piece. `:`(${n} characters.) `)+
+    "If it's complete, the key was deleted, regenerated or has expired: on GitHub open the token and tap “Regenerate token”, then paste the new one.";
+}
 const b64dec=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
 const blobToB64=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]);r.onerror=()=>rej(r.error);r.readAsDataURL(b);});
 
@@ -675,11 +686,12 @@ app.addEventListener("click",async e=>{
   const a=b.dataset.act;
   if(a==="back") return back(b.dataset.to);
   if(a==="savekey"){
-    const tok=$("#tok").value.trim(); if(!tok&&!cfg.token){ toast("Paste the access key first.","err"); return; }
+    const tok=cleanKey($("#tok").value); if(!tok&&!cfg.token){ toast("Paste the access key first.","err"); return; }
+    if(tok){ const bad=keyFormatProblem(tok); if(bad){ toast(bad,"err",0); return; } }
     const prev=cfg.token; if(tok) cfg.token=tok; b.disabled=true; b.textContent="Checking…";
     try{ await sync(); store.set("bm-token",cfg.token); store.set("bm-owner",cfg.owner); store.set("bm-repo",cfg.repo); store.set("bm-branch",cfg.branch);
       toast("Key saved ✓","ok"); history.replaceState({d:0},"","#/"); route(); }
-    catch(err){ cfg.token=prev; toast(explain(err),"err",0); b.disabled=false; b.textContent="Save key"; }
+    catch(err){ const used=cfg.token; cfg.token=prev; toast(err.status===401?rejectedKeyMsg(used):explain(err),"err",0); b.disabled=false; b.textContent="Save key"; }
     return;
   }
   if(a==="forgetkey"){ if(!confirm("Remove the access key from this phone?")) return; store.set("bm-token",null); cfg.token=""; route(); return; }
