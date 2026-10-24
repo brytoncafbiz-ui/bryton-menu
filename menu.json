@@ -77,7 +77,7 @@
       "price": 32000,
       "image": "images/ice-sea-salt-cream-latte-muta9gnp.jpg",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "nasi-goreng-bryton",
