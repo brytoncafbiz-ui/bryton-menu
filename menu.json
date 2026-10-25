@@ -1044,6 +1044,22 @@
       "available": true
     },
     {
+      "id": "item-mvnvi4qm",
+      "category": "snack",
+      "name": {
+        "id": "Bakwan Sayur",
+        "en": "Bakwan Sayur"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 20000,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
       "id": "item-muqffeeg",
       "category": "snack",
       "name": {
@@ -1072,22 +1088,6 @@
       },
       "price": 18000,
       "image": "images/tempe-mendoan-mutb0w4s.jpg",
-      "tags": [],
-      "available": true
-    },
-    {
-      "id": "item-mvnvi4qm",
-      "category": "snack",
-      "name": {
-        "id": "Bakwan Sayur",
-        "en": "Bakwan Sayur"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 20000,
-      "image": "",
       "tags": [],
       "available": true
     },
