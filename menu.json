@@ -1076,17 +1076,17 @@
       "available": true
     },
     {
-      "id": "item-muqesa5a",
+      "id": "item-mvnvi4qm",
       "category": "snack",
       "name": {
-        "id": "French Fries",
-        "en": "French Fries"
+        "id": "Bakwan Sayur",
+        "en": "Bakwan Sayur"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 15000,
+      "price": 20000,
       "image": "",
       "tags": [],
       "available": true
@@ -1230,6 +1230,22 @@
       ]
     },
     {
+      "id": "item-muqesa5a",
+      "category": "snack",
+      "name": {
+        "id": "French Fries",
+        "en": "French Fries"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 15000,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
       "id": "item-muqfd2pl",
       "category": "snack",
       "name": {
@@ -1260,22 +1276,6 @@
           "extra": 4000
         }
       ]
-    },
-    {
-      "id": "item-mvnvi4qm",
-      "category": "snack",
-      "name": {
-        "id": "Bakwan Sayur",
-        "en": "Bakwan Sayur"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 20000,
-      "image": "",
-      "tags": [],
-      "available": true
     },
     {
       "id": "item-muxzlzpb",
