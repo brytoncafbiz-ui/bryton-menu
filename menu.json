@@ -632,7 +632,7 @@
       "price": 40000,
       "image": "",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-muqezcsm",
@@ -1057,7 +1057,7 @@
       "price": 20000,
       "image": "",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-muqffeeg",
@@ -1089,7 +1089,7 @@
       "price": 18000,
       "image": "images/tempe-mendoan-mutb0w4s.jpg",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-muzl875k",
