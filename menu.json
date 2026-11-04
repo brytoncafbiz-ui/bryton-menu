@@ -632,7 +632,7 @@
       "price": 40000,
       "image": "",
       "tags": [],
-      "available": false
+      "available": true
     },
     {
       "id": "item-muqezcsm",
@@ -648,7 +648,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": false
+      "available": true
     },
     {
       "id": "item-muqe4uxi",
@@ -664,7 +664,7 @@
       "price": 35000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
@@ -1151,7 +1151,7 @@
       "price": 23000,
       "image": "",
       "tags": [],
-      "available": false,
+      "available": true,
       "variants": [
         {
           "name": {
