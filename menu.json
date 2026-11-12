@@ -1157,6 +1157,22 @@
       ]
     },
     {
+      "id": "item-mv83vm21",
+      "category": "non-coffee",
+      "name": {
+        "id": "Ice Lychee Bryton",
+        "en": "Ice Lychee Bryton"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 28500,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
       "id": "item-mv85f26k",
       "category": "menu-tambahan",
       "name": {
@@ -1248,22 +1264,6 @@
         "en": ""
       },
       "price": 0,
-      "image": "",
-      "tags": [],
-      "available": true
-    },
-    {
-      "id": "item-mv83vm21",
-      "category": "tea",
-      "name": {
-        "id": "Ice Lychee Bryton",
-        "en": "Ice Lychee Bryton"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 28500,
       "image": "",
       "tags": [],
       "available": true
