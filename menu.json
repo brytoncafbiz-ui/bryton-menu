@@ -20,6 +20,13 @@
       }
     },
     {
+      "id": "tea",
+      "name": {
+        "id": "Teh",
+        "en": "Tea"
+      }
+    },
+    {
       "id": "non-coffee",
       "name": {
         "id": "Non-Kopi",
