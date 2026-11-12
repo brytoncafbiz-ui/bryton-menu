@@ -491,38 +491,6 @@
       ]
     },
     {
-      "id": "item-muqd2ygt",
-      "category": "non-coffee",
-      "name": {
-        "id": "Teh Tarik",
-        "en": "Teh Tarik"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 22000,
-      "image": "images/teh-tarik-mutaddrq.jpg",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Ice"
-          },
-          "extra": 0
-        }
-      ]
-    },
-    {
       "id": "item-muqd4s81",
       "category": "non-coffee",
       "name": {
@@ -1434,6 +1402,38 @@
       "image": "images/ice-lychee-tea-muta969p.jpg",
       "tags": [],
       "available": true
+    },
+    {
+      "id": "item-muqd2ygt",
+      "category": "tea",
+      "name": {
+        "id": "Teh Tarik",
+        "en": "Teh Tarik"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 22000,
+      "image": "images/teh-tarik-mutaddrq.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Ice"
+          },
+          "extra": 0
+        }
+      ]
     }
   ]
 }
