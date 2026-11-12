@@ -41,6 +41,13 @@
       }
     },
     {
+      "id": "mie",
+      "name": {
+        "id": "Mie",
+        "en": "Noodle"
+      }
+    },
+    {
       "id": "pasta",
       "name": {
         "id": "Pasta",
