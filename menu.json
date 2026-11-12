@@ -491,22 +491,6 @@
       ]
     },
     {
-      "id": "item-muqdcyfm",
-      "category": "non-coffee",
-      "name": {
-        "id": "Ice Lychee Tea",
-        "en": "Ice Lychee Tea"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 23000,
-      "image": "images/ice-lychee-tea-muta969p.jpg",
-      "tags": [],
-      "available": true
-    },
-    {
       "id": "item-muqd2ygt",
       "category": "non-coffee",
       "name": {
@@ -1432,6 +1416,22 @@
       },
       "price": 0,
       "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "item-muqdcyfm",
+      "category": "tea",
+      "name": {
+        "id": "Ice Lychee Tea",
+        "en": "Ice Lychee Tea"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 23000,
+      "image": "images/ice-lychee-tea-muta969p.jpg",
       "tags": [],
       "available": true
     }
