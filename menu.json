@@ -475,38 +475,6 @@
       ]
     },
     {
-      "id": "item-muqd69iv",
-      "category": "non-coffee",
-      "name": {
-        "id": "Blackcurrant Tea",
-        "en": "Blackcurrant Tea"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 20000,
-      "image": "images/blackcurrant-tea-mutaa8vu.jpg",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Ice"
-          },
-          "extra": 0
-        }
-      ]
-    },
-    {
       "id": "item-muqf2qvc",
       "category": "food",
       "name": {
@@ -1416,6 +1384,38 @@
       },
       "price": 20000,
       "image": "images/lemon-tea-muqij538.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Ice"
+          },
+          "extra": 0
+        }
+      ]
+    },
+    {
+      "id": "item-muqd69iv",
+      "category": "tea",
+      "name": {
+        "id": "Blackcurrant Tea",
+        "en": "Blackcurrant Tea"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 20000,
+      "image": "images/blackcurrant-tea-mutaa8vu.jpg",
       "tags": [],
       "available": true,
       "variants": [
