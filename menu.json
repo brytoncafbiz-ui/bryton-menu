@@ -1340,6 +1340,22 @@
       "available": true
     },
     {
+      "id": "item-mv83vm21",
+      "category": "tea",
+      "name": {
+        "id": "Ice Lychee Bryton",
+        "en": "Ice Lychee Bryton"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 28500,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
       "id": "item-muqdcyfm",
       "category": "tea",
       "name": {
@@ -1418,22 +1434,6 @@
           "extra": 0
         }
       ]
-    },
-    {
-      "id": "item-mv83vm21",
-      "category": "tea",
-      "name": {
-        "id": "Ice Lychee Bryton",
-        "en": "Ice Lychee Bryton"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 28500,
-      "image": "",
-      "tags": [],
-      "available": true
     }
   ]
 }
