@@ -41,6 +41,13 @@
       }
     },
     {
+      "id": "pasta",
+      "name": {
+        "id": "Pasta",
+        "en": "Pasta"
+      }
+    },
+    {
       "id": "snack",
       "name": {
         "id": "Snacks",
@@ -423,6 +430,22 @@
       "name": {
         "id": "Xtra Chili Powder",
         "en": ""
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 0,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
+      "id": "item-mwddibfh",
+      "category": "coffee",
+      "name": {
+        "id": "Pasta",
+        "en": "Pasta"
       },
       "description": {
         "id": "",
