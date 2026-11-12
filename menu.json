@@ -418,6 +418,22 @@
       "available": true
     },
     {
+      "id": "item-mwdcnrn7",
+      "category": "coffee",
+      "name": {
+        "id": "Xtra Chili Powder",
+        "en": ""
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 0,
+      "image": "",
+      "tags": [],
+      "available": true
+    },
+    {
       "id": "item-mw22u4sl",
       "category": "non-coffee",
       "name": {
