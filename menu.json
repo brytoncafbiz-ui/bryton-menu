@@ -441,45 +441,20 @@
       "available": true
     },
     {
-      "id": "croissant",
+      "id": "item-mv83vm21",
       "category": "non-coffee",
       "name": {
-        "id": "Chocolate",
-        "en": "Chocolate"
+        "id": "Ice Lychee Bryton",
+        "en": "Ice Lychee Bryton"
       },
       "description": {
         "id": "",
         "en": ""
       },
-      "price": 28000,
-      "image": "images/chocolate-mutaalr2.jpg",
-      "tags": [
-        "new"
-      ],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Ice"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra gula",
-            "en": "Xtra sugar"
-          },
-          "extra": 1500
-        }
-      ]
+      "price": 28500,
+      "image": "",
+      "tags": [],
+      "available": true
     },
     {
       "id": "item-muqf2qvc",
@@ -1118,6 +1093,47 @@
       "available": true
     },
     {
+      "id": "croissant",
+      "category": "non-coffee",
+      "name": {
+        "id": "Chocolate",
+        "en": "Chocolate"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 28000,
+      "image": "images/chocolate-mutaalr2.jpg",
+      "tags": [
+        "new"
+      ],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Ice"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra gula",
+            "en": "Xtra sugar"
+          },
+          "extra": 1500
+        }
+      ]
+    },
+    {
       "id": "item-mv83tbun",
       "category": "non-coffee",
       "name": {
@@ -1155,22 +1171,6 @@
           "extra": 1500
         }
       ]
-    },
-    {
-      "id": "item-mv83vm21",
-      "category": "non-coffee",
-      "name": {
-        "id": "Ice Lychee Bryton",
-        "en": "Ice Lychee Bryton"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 28500,
-      "image": "",
-      "tags": [],
-      "available": true
     },
     {
       "id": "item-mv85f26k",
