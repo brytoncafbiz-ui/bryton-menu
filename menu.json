@@ -445,7 +445,7 @@
       "price": 32000,
       "image": "",
       "tags": [],
-      "available": true
+      "available": false
     },
     {
       "id": "item-mv83vm21",
