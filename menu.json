@@ -1150,45 +1150,6 @@
       "available": true
     },
     {
-      "id": "item-muqd90ud",
-      "category": "non-coffee",
-      "name": {
-        "id": "Teh",
-        "en": "Tea"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 12000,
-      "image": "images/tea-muta8wbc.jpg",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Ice"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Manis",
-            "en": "Sugar"
-          },
-          "extra": 0
-        }
-      ]
-    },
-    {
       "id": "item-mv83tbun",
       "category": "non-coffee",
       "name": {
@@ -1430,6 +1391,45 @@
           "name": {
             "id": "Dingin",
             "en": "Ice"
+          },
+          "extra": 0
+        }
+      ]
+    },
+    {
+      "id": "item-muqd90ud",
+      "category": "tea",
+      "name": {
+        "id": "Teh",
+        "en": "Tea"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 12000,
+      "image": "images/tea-muta8wbc.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Ice"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Manis",
+            "en": "Sugar"
           },
           "extra": 0
         }
