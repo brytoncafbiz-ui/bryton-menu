@@ -491,38 +491,6 @@
       ]
     },
     {
-      "id": "item-muqd4s81",
-      "category": "non-coffee",
-      "name": {
-        "id": "Lemon Tea",
-        "en": "Lemon Tea"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 20000,
-      "image": "images/lemon-tea-muqij538.jpg",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Panas",
-            "en": "Hot"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Dingin",
-            "en": "Ice"
-          },
-          "extra": 0
-        }
-      ]
-    },
-    {
       "id": "item-muqd69iv",
       "category": "non-coffee",
       "name": {
@@ -1416,6 +1384,38 @@
       },
       "price": 22000,
       "image": "images/teh-tarik-mutaddrq.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Panas",
+            "en": "Hot"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Dingin",
+            "en": "Ice"
+          },
+          "extra": 0
+        }
+      ]
+    },
+    {
+      "id": "item-muqd4s81",
+      "category": "tea",
+      "name": {
+        "id": "Lemon Tea",
+        "en": "Lemon Tea"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 20000,
+      "image": "images/lemon-tea-muqij538.jpg",
       "tags": [],
       "available": true,
       "variants": [
