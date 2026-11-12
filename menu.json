@@ -806,144 +806,6 @@
       "available": true
     },
     {
-      "id": "item-muzl875k",
-      "category": "food",
-      "name": {
-        "id": "Kwetiaw Goreng Tek-Tek",
-        "en": "Kwetiaw Goreng Tek-Tek"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 23000,
-      "image": "",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Tidak Pedas",
-            "en": "No Spicy"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas Sedang",
-            "en": "Medium Spicy"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas",
-            "en": "Spicy"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Rawit Iris",
-            "en": "Additional Sliced Chili"
-          },
-          "extra": 2000
-        }
-      ]
-    },
-    {
-      "id": "item-mv8uuq3c",
-      "category": "food",
-      "name": {
-        "id": "Mie Kuah Tek-Tek",
-        "en": "Mie Kuah Tek-Tek"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 23000,
-      "image": "",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Normal",
-            "en": "Normal"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra Rawit Iris",
-            "en": "Xtra Rawit Iris"
-          },
-          "extra": 2000
-        }
-      ]
-    },
-    {
-      "id": "item-muqf3q7e",
-      "category": "food",
-      "name": {
-        "id": "Instant Noodle",
-        "en": "Instant Noodle"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 20000,
-      "image": "",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Kornet",
-            "en": "Kornet"
-          },
-          "extra": 5000
-        },
-        {
-          "name": {
-            "id": "Porsi Double",
-            "en": "Porsi Double"
-          },
-          "extra": 5000
-        },
-        {
-          "name": {
-            "id": "Varian Rasa Kari Ayam",
-            "en": "Varian Kari Ayam"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Varian Mie Goreng",
-            "en": "Varian Mie Goreng"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Varian Soto",
-            "en": "Varian Soto"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra rawit iris",
-            "en": "Xtra rawit iris"
-          },
-          "extra": 2000
-        }
-      ]
-    },
-    {
       "id": "item-muqesa5a",
       "category": "snack",
       "name": {
@@ -1453,6 +1315,144 @@
           "name": {
             "id": "Pedas",
             "en": "Pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra rawit iris",
+            "en": "Xtra rawit iris"
+          },
+          "extra": 2000
+        }
+      ]
+    },
+    {
+      "id": "item-muzl875k",
+      "category": "mie",
+      "name": {
+        "id": "Kwetiaw Goreng Tek-Tek",
+        "en": "Kwetiaw Goreng Tek-Tek"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 23000,
+      "image": "",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Tidak Pedas",
+            "en": "No Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas Sedang",
+            "en": "Medium Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas",
+            "en": "Spicy"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Rawit Iris",
+            "en": "Additional Sliced Chili"
+          },
+          "extra": 2000
+        }
+      ]
+    },
+    {
+      "id": "item-mv8uuq3c",
+      "category": "mie",
+      "name": {
+        "id": "Mie Kuah Tek-Tek",
+        "en": "Mie Kuah Tek-Tek"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 23000,
+      "image": "",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Normal",
+            "en": "Normal"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra Rawit Iris",
+            "en": "Xtra Rawit Iris"
+          },
+          "extra": 2000
+        }
+      ]
+    },
+    {
+      "id": "item-muqf3q7e",
+      "category": "mie",
+      "name": {
+        "id": "Instant Noodle",
+        "en": "Instant Noodle"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 20000,
+      "image": "",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Kornet",
+            "en": "Kornet"
+          },
+          "extra": 5000
+        },
+        {
+          "name": {
+            "id": "Porsi Double",
+            "en": "Porsi Double"
+          },
+          "extra": 5000
+        },
+        {
+          "name": {
+            "id": "Varian Rasa Kari Ayam",
+            "en": "Varian Kari Ayam"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Varian Mie Goreng",
+            "en": "Varian Mie Goreng"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Varian Soto",
+            "en": "Varian Soto"
           },
           "extra": 0
         },
