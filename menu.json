@@ -726,52 +726,6 @@
       ]
     },
     {
-      "id": "item-muqek265",
-      "category": "food",
-      "name": {
-        "id": "Mie Goreng Sosis",
-        "en": "Mie Goreng Sosis"
-      },
-      "description": {
-        "id": "",
-        "en": ""
-      },
-      "price": 25000,
-      "image": "images/mie-goreng-sosis-mutabnm6.jpg",
-      "tags": [],
-      "available": true,
-      "variants": [
-        {
-          "name": {
-            "id": "Tidak pedas",
-            "en": "Tidak pedas"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas Sedang",
-            "en": "Pedas Sedang"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Pedas",
-            "en": "Pedas"
-          },
-          "extra": 0
-        },
-        {
-          "name": {
-            "id": "Xtra rawit iris",
-            "en": "Xtra rawit iris"
-          },
-          "extra": 2000
-        }
-      ]
-    },
-    {
       "id": "item-muqefv2z",
       "category": "food",
       "name": {
@@ -1446,6 +1400,52 @@
           "name": {
             "id": "Tidak Pedas",
             "en": "Tidak Pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas",
+            "en": "Pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Xtra rawit iris",
+            "en": "Xtra rawit iris"
+          },
+          "extra": 2000
+        }
+      ]
+    },
+    {
+      "id": "item-muqek265",
+      "category": "mie",
+      "name": {
+        "id": "Mie Goreng Sosis",
+        "en": "Mie Goreng Sosis"
+      },
+      "description": {
+        "id": "",
+        "en": ""
+      },
+      "price": 25000,
+      "image": "images/mie-goreng-sosis-mutabnm6.jpg",
+      "tags": [],
+      "available": true,
+      "variants": [
+        {
+          "name": {
+            "id": "Tidak pedas",
+            "en": "Tidak pedas"
+          },
+          "extra": 0
+        },
+        {
+          "name": {
+            "id": "Pedas Sedang",
+            "en": "Pedas Sedang"
           },
           "extra": 0
         },
