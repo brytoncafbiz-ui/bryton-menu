@@ -601,7 +601,7 @@
       "price": 30000,
       "image": "",
       "tags": [],
-      "available": true,
+      "available": false,
       "variants": [
         {
           "name": {
